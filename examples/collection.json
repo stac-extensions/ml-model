@@ -4,7 +4,7 @@
     "https://stac-extensions.github.io/ml-model/v1.0.0/schema.json"
   ],
   "type": "Collection",
-  "id": "collection",
+  "id": "containing-collection",
   "title": "Containing Collection",
   "description": "A description",
   "license": "MIT",
@@ -13,9 +13,9 @@
       "bbox": [
         [
           34.18,
-    0.47,
-    34.37,
-    0.71
+          0.47,
+          34.37,
+          0.71
         ]
       ]
     },
@@ -35,9 +35,15 @@
     }
   },
   "summaries": {
-    "ml-model:learning_approach": ["supervised"],
-    "ml-model:prediction_type": ["object-detection"],
-    "ml-model:architecture": ["RCNN"]
+    "ml-model:learning_approach": [
+      "supervised"
+    ],
+    "ml-model:prediction_type": [
+      "object-detection"
+    ],
+    "ml-model:architecture": [
+      "RCNN"
+    ]
   },
   "links": [
     {

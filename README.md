@@ -30,10 +30,10 @@ Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification. More d
 Describes the learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the 
 following values, but other values are allowed.
 
-* `"supervised"`
-* `"unsupervised"`
-* `"semi-supervised"`
-* `"reinforcement-learning"`
+- `"supervised"`
+- `"unsupervised"`
+- `"semi-supervised"`
+- `"reinforcement-learning"`
 
 #### ml-model:prediction_type
 
@@ -41,10 +41,10 @@ Describes the type of predictions made by the model. It is STRONGLY RECOMMENDED 
 following values, but other values are allowed. Note that not all Prediction Type values are valid
 for a given [Learning Approach].
 
-* `"object-detection"`
-* `"classification"`
-* `"segmentation"`
-* `"regression"`
+- `"object-detection"`
+- `"classification"`
+- `"segmentation"`
+- `"regression"`
 
 ## Relation types
 
@@ -85,3 +85,5 @@ If the tests reveal formatting problems with the examples, you can fix them with
 ```bash
 npm run format-examples
 ```
+
+[Learning Approach]: <#ml-modellearning_approach>

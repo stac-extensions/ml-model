@@ -38,6 +38,7 @@
       ]
     ]
   },
+  "collection": "containing-collection",
   "properties": {
     "datetime": "2020-12-11T22:38:32Z",
     "license": "MIT",
@@ -45,7 +46,7 @@
       {
         "name": "Natural Resources Canada (Charles Authier)",
         "roles": [
-          "creator"
+          "producer"
         ],
         "email": "charles.authier@nrcan-rncan.gc.ca",
         "url": "https://nrcan-rncan.gc.ca"
