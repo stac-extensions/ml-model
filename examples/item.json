@@ -40,6 +40,17 @@
   },
   "properties": {
     "datetime": "2020-12-11T22:38:32Z",
+    "license": "MIT",
+    "providers": [
+      {
+        "name": "Natural Resources Canada (Charles Authier)",
+        "roles": [
+          "creator"
+        ],
+        "email": "charles.authier@nrcan-rncan.gc.ca",
+        "url": "https://nrcan-rncan.gc.ca"
+      }
+    ],
     "ml-model:learning_approach": "supervised",
     "ml-model:prediction_type": "object-detection",
     "ml-model:architecture": "RCNN"

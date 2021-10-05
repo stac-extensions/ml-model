@@ -7,7 +7,7 @@
   "id": "collection",
   "title": "Containing Collection",
   "description": "A description",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "extent": {
     "spatial": {
       "bbox": [
