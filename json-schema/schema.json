@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://stac-extensions.github.io/template/v1.0.0/schema.json#",
-  "title": "Template Extension",
-  "description": "STAC Template Extension for STAC Items and STAC Collections.",
+  "$id": "https://stac-extensions.github.io/ml-model/v1.0.0/schema.json#",
+  "title": "ML Model Extension",
+  "description": "STAC ML Model Extension for STAC Items.",
   "oneOf": [
     {
       "$comment": "This is the schema for STAC Items. Remove this object if this extension only applies to Collections.",
@@ -26,7 +26,9 @@
                 {
                   "$comment": "Require fields here for Item Properties.",
                   "required": [
-                    "template:new_field"
+                    "ml-model:learning_approach",
+                    "ml-model:prediction_type",
+                    "ml-model:architecture"
                   ]
                 },
                 {
@@ -64,20 +66,6 @@
         }
       ],
       "anyOf": [
-        {
-          "$comment": "This is the schema for the top-level fields in a Collection. Remove this if this extension does not define top-level fields for Collections.",
-          "allOf": [
-            {
-              "$comment": "Require fields here for Collections (top-level).",
-              "required": [
-                "template:new_field"
-              ]
-            },
-            {
-              "$ref": "#/definitions/fields"
-            }
-          ]
-        },
         {
           "$comment": "This validates the fields in Collection Assets, but does not require them.",
           "required": [
@@ -160,48 +148,39 @@
     "require_any_field": {
       "$comment": "Please list all fields here so that we can force the existance of one of them in other parts of the schemas.",
       "anyOf": [
-        {"required": ["template:new_field"]},
-        {"required": ["template:xyz"]},
-        {"required": ["template:another_one"]}
+        {
+          "required": [
+            "ml-model:learning_approach"
+          ]
+        },
+        {
+          "required": [
+            "ml-model:prediction_type"
+          ]
+        },
+        {
+          "required": [
+            "ml-model:architecture"
+          ]
+        }
       ]
     },
     "fields": {
       "$comment": "Add your new fields here. Don't require them here, do that above in the corresponding schema.",
       "type": "object",
       "properties": {
-        "template:new_field": {
+        "ml-model:learning_approach": {
           "type": "string"
         },
-        "template:xyz": {
-          "type": "object",
-          "required": [
-            "x",
-            "y",
-            "z"
-          ],
-          "properties": {
-            "x": {
-              "type": "number"
-            },
-            "y": {
-              "type": "number"
-            },
-            "z": {
-              "type": "number"
-            }
-          }
-        }, 
-        "template:another_one": {
-          "type": "array", 
-          "items": {
-            "type": "number"
-          }
+        "ml-model:prediction_type": {
+          "type": "string"
+        },
+        "ml-model:architecture": {
+          "type": "string"
         }
       },
       "patternProperties": {
-        "^(?!template:)": {
-          "$comment": "Above, change `template` to the prefix of this extension"
-        }
+        "^(?!ml-model:)": {}
       },
       "additionalProperties": false
     }

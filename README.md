@@ -1,44 +1,50 @@
 # Template Extension Specification
 
-- **Title:** Template
-- **Identifier:** <https://stac-extensions.github.io/template/v1.0.0/schema.json>
-- **Field Name Prefix:** template
+- **Title:** ML Model
+- **Identifier:** <https://stac-extensions.github.io/ml-model/v1.0.0/schema.json>
+- **Field Name Prefix:** ml-model
 - **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
-- **Owner**: @your-gh-handles @person2
+- **Owner**: @duckontheweb
 
-This document explains the Template Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
-This is the place to add a short introduction.
+This document explains the ML Model Extension to the [SpatioTemporal Asset
+Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification. More details to come...
 
 - Examples:
   - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
-  - [Collection example](examples/collection.json): Shows the basic usage of the extension in a STAC Collection
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
-## Item Properties and Collection Fields
+## Item Properties
 
-| Field Name           | Type                      | Description |
-| -------------------- | ------------------------- | ----------- |
-| template:new_field   | string                    | **REQUIRED**. Describe the required field... |
-| template:xyz         | [XYZ Object](#xyz-object) | Describe the field... |
-| template:another_one | \[number]                 | Describe the field... |
+| Field Name                 | Type                      | Description |
+| -------------------------- | ------------------------- | ----------- |
+| ml-model:learning_approach | string                    | **REQUIRED**. The learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the values described below, but other values are allowed. |
+| ml-model:prediction_type   | string                    | **REQUIRED.** The type of prediction that the model makes. It is STRONGLY RECOMMENDED that you use one of the values described below, but other values are allowed.   |
+| ml-model:architecture      | string                    | **REQUIRED.** Identifies the architecture employed by the model (e.g. RCNN, U-Net, etc.). This may be any string identifier, but publishers are encouraged to use well-known identifiers whenever possible. |
 
 ### Additional Field Information
 
-#### template:new_field
+#### ml-model:learning_approach
 
-This is a much more detailed description of the field `template:new_field`...
+Describes the learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the 
+following values, but other values are allowed.
 
-### XYZ Object
+* `"supervised"`
+* `"unsupervised"`
+* `"semi-supervised"`
+* `"reinforcement-learning"`
 
-This is the introduction for the purpose and the content of the XYZ Object...
+#### ml-model:prediction_type
 
-| Field Name  | Type   | Description |
-| ----------- | ------ | ----------- |
-| x           | number | **REQUIRED**. Describe the required field... |
-| y           | number | **REQUIRED**. Describe the required field... |
-| z           | number | **REQUIRED**. Describe the required field... |
+Describes the type of predictions made by the model. It is STRONGLY RECOMMENDED that you use one of the 
+following values, but other values are allowed. Note that not all Prediction Type values are valid
+for a given [Learning Approach].
+
+* `"object-detection"`
+* `"classification"`
+* `"segmentation"`
+* `"regression"`
 
 ## Relation types
 
@@ -47,7 +53,7 @@ The following types should be used as applicable `rel` types in the
 
 | Type                | Description |
 | ------------------- | ----------- |
-| fancy-rel-type      | This link points to a fancy resource. |
+| TBD                 | More detail to come... |
 
 ## Contributing
 
