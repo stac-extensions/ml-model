@@ -17,9 +17,12 @@ Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification. More d
 
 ## Scope & Vision
 
-The goal of the STAC ML Model Extension is to provide a way of cataloging machine learning (ML) models that operate on Earth observation (EO) data described as a STAC catalog. The metadata related to machine learning models and their related artifacts (e.g. training data, performance  metrics, etc.) can be extremely broad. This extension limits its scope to ML model metadata that aids in the discoverability and usability/reusability of these models for the following types of use-cases:
+The goal of the STAC ML Model Extension is to provide a way of cataloging machine learning (ML) models that operate on Earth observation (EO) data
+described as a STAC catalog. The metadata related to machine learning models and their related artifacts (e.g. training data, performance  metrics,
+etc.) can be extremely broad. This extension limits its scope to ML model metadata that aids in the discoverability and usability/reusability of
+these models for the following types of use-cases:
 
--  **Adoption of Models in Analytic Pipelines**
+- **Adoption of Models in Analytic Pipelines**
 
     Individuals and organizations hoping to use ML model predictions into their own analytic pipelines need a way of discovering models that will
     work for a given geographic area, application domain, and type of input data and that produce a specific kind of output (object detection v.
@@ -120,4 +123,3 @@ npm run format-examples
 ```
 
 [Learning Approach]: <#ml-modellearning_approach>
-[STAC specification]: <https://github.com/radiantearth/stac-spec>
