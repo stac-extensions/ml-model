@@ -1,4 +1,4 @@
-# Template Extension Specification
+# ML Model Extension Specification
 
 - **Title:** ML Model
 - **Identifier:** <https://stac-extensions.github.io/ml-model/v1.0.0/schema.json>
@@ -14,6 +14,39 @@ Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification. More d
   - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
+
+## Scope & Vision
+
+The goal of the STAC ML Model Extension is to provide a way of cataloging machine learning (ML) models that operate on Earth observation (EO) data described as a STAC catalog. The metadata related to machine learning models and their related artifacts (e.g. training data, performance  metrics, etc.) can be extremely broad. This extension limits its scope to ML model metadata that aids in the discoverability and usability/reusability of these models for the following types of use-cases:
+
+-  **Adoption of Models in Analytic Pipelines**
+
+    Individuals and organizations hoping to use ML model predictions into their own analytic pipelines need a way of discovering models that will
+    work for a given geographic area, application domain, and type of input data and that produce a specific kind of output (object detection v.
+    classification). Consider the example of a global non-profit organization that wants to use ML to track deforestation. A data engineer from this
+    organization might be interested in discovering segmentation models that accurately produce land cover classes over parts of South America using
+    Sentinel 2 imagery. The STAC ML Model Extension aims to support this use-case by describing metadata related to the recommended area over which
+    the model may be used, a description of the model architecture and type of input data it requires, and links to containerized model images or
+    model files that can be used to run the model to generate inferences.
+
+- **Re-training of Existing Models in New Contexts**
+
+    The process of training ML models on Earth observation data can be extremely time-consuming and costly due to the volume of data required.
+    Providing tools that ease the discovery of existing models and training data will make ML models more accessible by reducing this training
+    burden. Suppose the non-profit from the previous example found a model that generated the kind of predictions they were interested in, but was
+    not applicable to their region of interest. Rather than creating a new model from scratch, the organization might be interested in using transfer
+    learning to re-train the existing model on data from their area of interest. In this case, they would need enough information about the training
+    environment and model architecture to reproduce the model weights and continue training the model using new data. The STAC ML Model Extensions
+    aims to support this use-case by providing links to serialized versions of the model (e.g. a PyTorch checkpoint file) as well as enough detail
+    about the training environment that a data scientist could reasonably implement transfer learning using new data.
+
+- **Reproducibility of ML Experiments**
+
+    The ability to reproduce published ML experiments is crucial for verifying and building upon previous ML research. Increasingly, individuals and
+    institutions are making an effort to publish code and examples along with academic publications to enable this kind of reproducibility. However,
+    the quality and usability of this code and related documentation can vary widely and there are currently no standards that ensure that a new
+    researcher could reproduce a given set of published results from the documentation. The STAC ML Model Extension aims to address this issue by
+    providing a detailed description of the training data and environment used in a ML model experiment. 
 
 ## Item Properties
 
@@ -87,3 +120,4 @@ npm run format-examples
 ```
 
 [Learning Approach]: <#ml-modellearning_approach>
+[STAC specification]: <https://github.com/radiantearth/stac-spec>
