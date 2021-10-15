@@ -82,6 +82,29 @@ for a given [Learning Approach].
 - `"segmentation"`
 - `"regression"`
 
+## Interpretation of STAC Fields
+
+The semantics of ML model metadata can sometimes differ significantly from the use-cases for which STAC was originally intended (Earth observation data). We feel that the benefits of structuring this metadata as a STAC Extensions outweigh the possible downsides, but it does require us to be specific about how certain STAC fields should be interpreted. The following definitions clarify the meaning of core fields from the STAC spec; for any fields not specifically defined here, please refer to the core STAC spec.
+
+### Spatiotemporal Fields
+
+| Field Name     | Type                      | Description                                                                                  |
+|----------------|---------------------------|----------------------------------------------------------------------------------------------|
+| geometry       | [GeoJSON Geometry Object] | The geographic area over which the model may be used. Note that this may be the same as the area over which the model was trained, but could also represent additional areas where model performance has been tested or where the model publisher believes it will perform well based on similarities to the training environment.     |
+| start_datetime | string                    | The earliest date and time input imagery that should be used to generate inferences using the model. See the [STAC Date and Time Range] section for details. |
+| end_datetime   | string                    | The earliest date and time input imagery that should be used to generate inferences using the model. See the [STAC Date and Time Range] section for details. |
+| datetime       | string                    | In general this should not be used, since a date range will almost always be more appropriate. |
+
+### Licensing
+
+All licensing fields and links should refer to licensing for the *model itself* and not training data or other artifacts associated with the model.
+See the [STAC Licensing] section for details on those fields.
+
+### Instrument
+
+All fields defined in the [STAC Instrument] section should describe recommended input data characteristics for running the model to generate
+inferences. See that section for details on those fields.
+
 ## Relation types
 
 The following types should be used as applicable `rel` types in the
@@ -123,3 +146,7 @@ npm run format-examples
 ```
 
 [Learning Approach]: <#ml-modellearning_approach>
+[GeoJSON Geometry Object]: <https://tools.ietf.org/html/rfc7946#section-3.1>
+[STAC Date and Time Range]: <https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range>
+[STAC Licensing]: <https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#licensing>
+[STAC Instrument]: <https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#instrument>
