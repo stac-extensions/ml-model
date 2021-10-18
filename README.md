@@ -104,6 +104,17 @@ See the [STAC Licensing] section for details on those fields.
 
 All other fields defined in the [STAC Common Metadata] documentation should be interpreted as referring to the imagery used to train the model.
 
+## Usage with Other STAC Extensions
+
+It is RECOMMENDED that following STAC Extensions be used in conjunction with the ML Model STAC Extension to fully describe geospatial ML models:
+
+- [Scientific Citation Extension]: This extension should be used to describe how the model should cited in publications, as well as to reference any
+  existing publications associated with the model.
+- [Versioning Indicators Extension]: This extension should be used to describe models with multiple versions, including cases where older versions
+  have been deprecated.
+- [Timestamps Extension]: This extension may be used to provide more detailed timestamps for the publication, expiration, and/or un-publication of
+  the model
+
 ## Relation types
 
 The following types should be used as applicable `rel` types in the
@@ -149,3 +160,6 @@ npm run format-examples
 [STAC Date and Time Range]: <https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range>
 [STAC Licensing]: <https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#licensing>
 [STAC Common Metadata]: <https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md>
+[Scientific Citation Extension]: <https://github.com/stac-extensions/scientific>
+[Versioning Indicators Extension]: <https://github.com/stac-extensions/version>
+[Timestamps Extension]: <https://github.com/stac-extensions/timestamps>
