@@ -88,22 +88,21 @@ The semantics of ML model metadata can sometimes differ significantly from the u
 
 ### Spatiotemporal Fields
 
-| Field Name     | Type                      | Description                                                                                  |
-|----------------|---------------------------|----------------------------------------------------------------------------------------------|
-| geometry       | [GeoJSON Geometry Object] | The geographic area over which the model may be used. Note that this may be the same as the area over which the model was trained, but could also represent additional areas where model performance has been tested or where the model publisher believes it will perform well based on similarities to the training environment.     |
-| start_datetime | string                    | The earliest date and time input imagery that should be used to generate inferences using the model. See the [STAC Date and Time Range] section for details. |
-| end_datetime   | string                    | The earliest date and time input imagery that should be used to generate inferences using the model. See the [STAC Date and Time Range] section for details. |
-| datetime       | string                    | In general this should not be used, since a date range will almost always be more appropriate. |
+| Field Name     | Type                      | Description                                                                                      |
+|----------------|---------------------------|--------------------------------------------------------------------------------------------------|
+| geometry       | [GeoJSON Geometry Object] | The geographic area over which the model was trained.                                            |
+| start_datetime | string                    | The first or start date and time for the images that the model was trained on.                   |
+| end_datetime   | string                    | The last or end date and time for the images that the model was trained on.                      |
+| datetime       | string                    | *In general this should not be used, since a date range will almost always be more appropriate.* |
 
 ### Licensing
 
 All licensing fields and links should refer to licensing for the *model itself* and not training data or other artifacts associated with the model.
 See the [STAC Licensing] section for details on those fields.
 
-### Instrument
+### Other Common Metadata
 
-All fields defined in the [STAC Instrument] section should describe recommended input data characteristics for running the model to generate
-inferences. See that section for details on those fields.
+All other fields defined in the [STAC Common Metadata] documentation should be interpreted as referring to the imagery used to train the model.
 
 ## Relation types
 
@@ -149,4 +148,4 @@ npm run format-examples
 [GeoJSON Geometry Object]: <https://tools.ietf.org/html/rfc7946#section-3.1>
 [STAC Date and Time Range]: <https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range>
 [STAC Licensing]: <https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#licensing>
-[STAC Instrument]: <https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#instrument>
+[STAC Common Metadata]: <https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md>
