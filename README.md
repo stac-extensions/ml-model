@@ -95,7 +95,7 @@ any fields not specifically defined here, please refer to the core STAC spec.
 |----------------|---------------------------|----------------------------------------------------------------------------------------------|
 | geometry       | [GeoJSON Geometry Object](https://tools.ietf.org/html/rfc7946#section-3.1) | The geographic area over which the model may be used. Note that this may be the same as the area over which the model was trained, but could also represent additional areas where model performance has been tested or where the model publisher believes it will perform well based on similarities to the training environment.     |
 | start_datetime | string                    | The first or start date and time for images that should be used to generate inferences using the model. |
-| end_datetime   | string                    | The last or end date and time for images that should be used to generate inferences using the model. See the [STAC Date and Time Range] section for details.|
+| end_datetime   | string                    | The last or end date and time for images that should be used to generate inferences using the model. See the [STAC Date and Time Range] section for details. To represent an open interval (e.g. imagery from 2021-01-01T00:00:00Z or later), use the maximum value (`"9999-12-31T23:59:59Z"`) for `end_datetime`. |
 | datetime       | string                    | *This should always be `null`, since a date range (using `start_datetime` and `end_datetime`) will almost always be more appropriate.* |
 
 
