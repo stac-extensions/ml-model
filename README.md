@@ -75,7 +75,7 @@ following values, but other values are allowed.
 
 Describes the type of predictions made by the model. It is STRONGLY RECOMMENDED that you use one of the 
 following values, but other values are allowed. Note that not all Prediction Type values are valid
-for a given [Learning Approach].
+for a given [Learning Approach](#ml-modellearning_approach).
 
 - `"object-detection"`
 - `"classification"`
@@ -84,13 +84,16 @@ for a given [Learning Approach].
 
 ## Interpretation of STAC Fields
 
-The semantics of ML model metadata can sometimes differ significantly from the use-cases for which STAC was originally intended (Earth observation data). We feel that the benefits of structuring this metadata as a STAC Extensions outweigh the possible downsides, but it does require us to be specific about how certain STAC fields should be interpreted. The following definitions clarify the meaning of core fields from the STAC spec; for any fields not specifically defined here, please refer to the core STAC spec.
+The semantics of ML model metadata can sometimes differ significantly from the use-cases for which STAC was originally intended (Earth observation
+data). We feel that the benefits of structuring this metadata as a STAC Extensions outweigh the possible downsides, but it does require us to be
+specific about how certain STAC fields should be interpreted. The following definitions clarify the meaning of core fields from the STAC spec; for
+any fields not specifically defined here, please refer to the core STAC spec.
 
 ### Spatiotemporal Fields
 
 | Field Name     | Type                      | Description                                                                                      |
 |----------------|---------------------------|--------------------------------------------------------------------------------------------------|
-| geometry       | [GeoJSON Geometry Object] | The geographic area over which the model was trained.                                            |
+| geometry       | [GeoJSON Geometry Object](https://tools.ietf.org/html/rfc7946#section-3.1) | The geographic area over which the model was trained.                                            |
 | start_datetime | string                    | The first or start date and time for the images that the model was trained on.                   |
 | end_datetime   | string                    | The last or end date and time for the images that the model was trained on.                      |
 | datetime       | string                    | *In general this should not be used, since a date range will almost always be more appropriate.* |
@@ -98,22 +101,24 @@ The semantics of ML model metadata can sometimes differ significantly from the u
 ### Licensing
 
 All licensing fields and links should refer to licensing for the *model itself* and not training data or other artifacts associated with the model.
-See the [STAC Licensing] section for details on those fields.
+See the [STAC Licensing](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#licensing) section for details on those
+fields.
 
 ### Other Common Metadata
 
-All other fields defined in the [STAC Common Metadata] documentation should be interpreted as referring to the imagery used to train the model.
+All other fields defined in the [STAC Common Metadata](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md)
+documentation should be interpreted as referring to the imagery used to train the model.
 
 ## Usage with Other STAC Extensions
 
 It is RECOMMENDED that following STAC Extensions be used in conjunction with the ML Model STAC Extension to fully describe geospatial ML models:
 
-- [Scientific Citation Extension]: This extension should be used to describe how the model should cited in publications, as well as to reference any
-  existing publications associated with the model.
-- [Versioning Indicators Extension]: This extension should be used to describe models with multiple versions, including cases where older versions
-  have been deprecated.
-- [Timestamps Extension]: This extension may be used to provide more detailed timestamps for the publication, expiration, and/or un-publication of
-  the model
+- [Scientific Citation Extension](https://github.com/stac-extensions/scientific): This extension should be used to describe how the model should
+  cited in publications, as well as to reference any existing publications associated with the model.
+- [Versioning Indicators Extension](https://github.com/stac-extensions/version): This extension should be used to describe models with multiple
+  versions, including cases where older versions have been deprecated.
+- [Timestamps Extension](https://github.com/stac-extensions/timestamps): This extension may be used to provide more detailed timestamps for the
+  publication, expiration, and/or un-publication of the model
 
 ## Relation types
 
@@ -154,12 +159,3 @@ If the tests reveal formatting problems with the examples, you can fix them with
 ```bash
 npm run format-examples
 ```
-
-[Learning Approach]: <#ml-modellearning_approach>
-[GeoJSON Geometry Object]: <https://tools.ietf.org/html/rfc7946#section-3.1>
-[STAC Date and Time Range]: <https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range>
-[STAC Licensing]: <https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#licensing>
-[STAC Common Metadata]: <https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md>
-[Scientific Citation Extension]: <https://github.com/stac-extensions/scientific>
-[Versioning Indicators Extension]: <https://github.com/stac-extensions/version>
-[Timestamps Extension]: <https://github.com/stac-extensions/timestamps>
