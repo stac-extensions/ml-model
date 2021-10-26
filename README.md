@@ -91,23 +91,17 @@ any fields not specifically defined here, please refer to the core STAC spec.
 
 ### Spatiotemporal Fields
 
-| Field Name     | Type                      | Description                                                                                      |
-|----------------|---------------------------|--------------------------------------------------------------------------------------------------|
-| geometry       | [GeoJSON Geometry Object](https://tools.ietf.org/html/rfc7946#section-3.1) | The geographic area over which the model was trained.                                            |
-| start_datetime | string                    | The first or start date and time for the images that the model was trained on.                   |
-| end_datetime   | string                    | The last or end date and time for the images that the model was trained on.                      |
+| Field Name     | Type                      | Description                                                                                  |
+|----------------|---------------------------|----------------------------------------------------------------------------------------------|
+| geometry       | [GeoJSON Geometry Object](https://tools.ietf.org/html/rfc7946#section-3.1) | The geographic area over which the model may be used. Note that this may be the same as the area over which the model was trained, but could also represent additional areas where model performance has been tested or where the model publisher believes it will perform well based on similarities to the training environment.     |
+| start_datetime | string                    | The first or start date and time for images that should be used to generate inferences using the model. |
+| end_datetime   | string                    | The last or end date and time for images that should be used to generate inferences using the model. See the [STAC Date and Time Range] section for details.|
 | datetime       | string                    | *This should always be `null`, since a date range (using `start_datetime` and `end_datetime`) will almost always be more appropriate.* |
 
-### Licensing
 
-All licensing fields and links should refer to licensing for the *model itself* and not training data or other artifacts associated with the model.
-See the [STAC Licensing](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#licensing) section for details on those
-fields.
-
-### Other Common Metadata
 
 All other fields defined in the [STAC Common Metadata](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md)
-documentation should be interpreted as referring to the imagery used to train the model.
+documentation should be interpreted as referring to imagery that may be used for running the model to generate inferences.
 
 ## Usage with Other STAC Extensions
 
