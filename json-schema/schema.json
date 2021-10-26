@@ -140,7 +140,7 @@
         "stac_extensions": {
           "type": "array",
           "contains": {
-            "const": "https://stac-extensions.github.io/template/v1.0.0/schema.json"
+            "const": "https://stac-extensions.github.io/ml-model/v1.0.0/schema.json"
           }
         }
       }
