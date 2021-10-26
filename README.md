@@ -107,10 +107,6 @@ It is RECOMMENDED that following STAC Extensions be used in conjunction with the
 
 - [Scientific Citation Extension](https://github.com/stac-extensions/scientific): This extension should be used to describe how the model should
   cited in publications, as well as to reference any existing publications associated with the model.
-- [Versioning Indicators Extension](https://github.com/stac-extensions/version): This extension should be used to describe models with multiple
-  versions, including cases where older versions have been deprecated.
-- [Timestamps Extension](https://github.com/stac-extensions/timestamps): This extension may be used to provide more detailed timestamps for the
-  publication, expiration, and/or un-publication of the model
 
 ## Relation types
 
