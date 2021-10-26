@@ -96,7 +96,7 @@ any fields not specifically defined here, please refer to the core STAC spec.
 | geometry       | [GeoJSON Geometry Object](https://tools.ietf.org/html/rfc7946#section-3.1) | The geographic area over which the model was trained.                                            |
 | start_datetime | string                    | The first or start date and time for the images that the model was trained on.                   |
 | end_datetime   | string                    | The last or end date and time for the images that the model was trained on.                      |
-| datetime       | string                    | *In general this should not be used, since a date range will almost always be more appropriate.* |
+| datetime       | string                    | *This should always be `null`, since a date range (using `start_datetime` and `end_datetime`) will almost always be more appropriate.* |
 
 ### Licensing
 
