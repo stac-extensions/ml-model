@@ -16,4 +16,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-[Unreleased]: <https://github.com/stac-extensions/template/compare/v1.0.0...HEAD>
+[Unreleased]: <https://github.com/stac-extensions/ml-model/compare/v1.0.0...HEAD>
