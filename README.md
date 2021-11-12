@@ -11,7 +11,7 @@ This document explains the ML Model Extension to the [SpatioTemporal Asset
 Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification. More details to come...
 
 - Examples:
-  - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
+  - [Item example](examples/dummy/item.json): Shows the basic usage of the extension in a STAC Item
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
@@ -124,6 +124,17 @@ All contributions are subject to the
 For contributions, please follow the
 [STAC specification contributing guide](https://github.com/radiantearth/stac-spec/blob/master/CONTRIBUTING.md) Instructions
 for running tests are copied here for convenience.
+
+### Contributing Examples & Tutorials
+
+All community members are encouraged to contributes their own examples of cataloged ML models. If you have a model that you have cataloged using this
+extension, please open a PR to include it in the `examples` directory. Here are some guidelines for contributing example catalogs:
+
+- New examples should go in their own sub-directory under the `examples` directory (e.g. `examples/my-new-model`)
+- All links and assets referenced in the catalog must be publicly available
+- Include any supplementary files (model checkpoint files, etc.) that are not served publicly in the same directory as the model catalog and
+  reference these using relative links.
+- If possible, please include a Collection (even if it only contains a single Item) with any relevant summaries.
 
 ### Running tests
 
