@@ -32,7 +32,7 @@
                   ]
                 },
                 {
-                  "$ref": "#/definitions/fields"
+                  "$ref": "#/definitions/common_fields"
                 }
               ]
             },
@@ -40,7 +40,7 @@
               "$comment": "This validates the fields in Item Assets, but does not require them.",
               "type": "object",
               "additionalProperties": {
-                "$ref": "#/definitions/fields"
+                "$ref": "#/definitions/common_fields"
               }
             }
           }
@@ -82,7 +82,7 @@
                         "$ref": "#/definitions/require_any_field"
                       },
                       {
-                        "$ref": "#/definitions/fields"
+                        "$ref": "#/definitions/common_fields"
                       }
                     ]
                   }
@@ -107,7 +107,7 @@
                         "$ref": "#/definitions/require_any_field"
                       },
                       {
-                        "$ref": "#/definitions/fields"
+                        "$ref": "#/definitions/common_fields"
                       }
                     ]
                   }
@@ -165,8 +165,8 @@
         }
       ]
     },
-    "fields": {
-      "$comment": "Add your new fields here. Don't require them here, do that above in the corresponding schema.",
+    "common_fields": {
+      "$comment": "Add your new Item fields here. Don't require them here, do that above in the corresponding schema.",
       "type": "object",
       "properties": {
         "ml-model:learning_approach": {

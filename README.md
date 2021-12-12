@@ -59,6 +59,57 @@ these models for the following types of use-cases:
 | ml-model:prediction_type   | string                    | **REQUIRED.** The type of prediction that the model makes. It is STRONGLY RECOMMENDED that you use one of the values described below, but other values are allowed.   |
 | ml-model:architecture      | string                    | **REQUIRED.** Identifies the architecture employed by the model (e.g. RCNN, U-Net, etc.). This may be any string identifier, but publishers are encouraged to use well-known identifiers whenever possible. |
 
+## Asset Objects
+
+### Roles
+
+| Role Name                | Description |
+| ------------------------ | ----------- |
+| ml-model:inference-runtime | Represents a file containing instructions for running a containerized version of the model to generate inferences. See the [Inference Runtimes](#inference-runtimes) section below for details on related fields. |
+
+### Inference Runtimes
+
+An Asset with the `ml-model:inference-runtime` role represents a file containing instructions for running a containerized version of the model to
+generate inferences. Currently, only [Compose files](https://github.com/compose-spec/compose-spec/blob/master/spec.md#compose-file) are supported,
+but support is planned for other formats, including [Common Workflow Language (CWL)](https://www.commonwl.org/) and [Workflow Description Language
+(WDL)](https://openwdl.org/).
+
+The `"type"` field should be used to indicate the format of this asset. Assets in the Compose format should have a `"type"` value of
+`"text/x-yaml; application=compose"`.
+
+While the Compose file defines nearly all of the parameters required to run the containerized model image, we still need a way to define which host
+directory containing input data should be mounted to the container and to which host directory the output predictions should be written. The Compose
+file MUST define volume mounts for input and output data using the Compose
+[Interpolation syntax](https://github.com/compose-spec/compose-spec/blob/master/spec.md#interpolation). The input data volume MUST be defined by an
+`INPUT_VOLUME` variable and the output data volume MUST be defined by an `OUTPUT_DATA` variable. 
+
+For example, the following Compose file snippet would mount the host input directory to `/var/data/input` in the container and would mount the host
+output data directory to `/var/data/output` in the host container. In this contrived example, the script to run the model takes 2 arguments: the
+location to the input data directory and the location to the output data directory.
+
+```yaml
+services:
+  ...
+  model_runtime:
+    ...
+    volumes:
+      - "${INPUT_DATA}:/var/data/input"
+      - "${OUTPUT_DATA}:/var/data/output"
+    command: "run-model.sh /var/data/input /var/data/output"
+```
+
+A user would then set the `INPUT_DATA` and `OUTPUT_DATA` environment variables when running the model. An example using `docker-compose` might look
+like the following:
+
+```console
+$ INPUT_DATA=/local/path/to/model/inputs; \
+  OUTPUT_DATA=/local/path/to/model/outputs; \
+  docker-compose up -f path/to/inference-runtime.yml
+```
+
+It is RECOMMENDED that model publishers use the Asset `description` field to describe any other requirements or constraints for running the model
+container.
+
 ### Additional Field Information
 
 #### ml-model:learning_approach
@@ -81,6 +132,15 @@ for a given [Learning Approach](#ml-modellearning_approach).
 - `"classification"`
 - `"segmentation"`
 - `"regression"`
+
+## Relation types
+
+The following types should be used as applicable `rel` types in the
+[Link Object](https://github.com/radiantearth/stac-spec/tree/master/item-spec/item-spec.md#link-object).
+
+| Type                         | Description |
+| ---------------------------- | ----------- |
+| ml-model:image               | Links with this relation type refer to Docker images built using the model. The `href` value for links of this type should contain a fully-qualified URI for the image as would be required for a command like `docker pull`. These URIs should be of the form `<registry_domain>/<user_or_organization_name>/<image_name>:<tag>`. Links with this relation type should have a `"type"` value of `"docker-image"` to indicate a Docker image. |
 
 ## Interpretation of STAC Fields
 
@@ -107,15 +167,6 @@ It is RECOMMENDED that following STAC Extensions be used in conjunction with the
 
 - [Scientific Citation Extension](https://github.com/stac-extensions/scientific): This extension should be used to describe how the model should
   cited in publications, as well as to reference any existing publications associated with the model.
-
-## Relation types
-
-The following types should be used as applicable `rel` types in the
-[Link Object](https://github.com/radiantearth/stac-spec/tree/master/item-spec/item-spec.md#link-object).
-
-| Type                | Description |
-| ------------------- | ----------- |
-| TBD                 | More detail to come... |
 
 ## Contributing
 
