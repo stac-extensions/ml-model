@@ -65,21 +65,44 @@ these models for the following types of use-cases:
 
 | Role Name                | Description |
 | ------------------------ | ----------- |
-| ml-model:inferencing-image | Represents a containerized version of the model that can be used to generate inferences. See the [Inferencing Images](#inferencing-images) section below for details on related fields. |
+| ml-model:inference-runtime | Represents a containerized version of the model that can be used to generate inferences. See the [Inferencing Images](#inferencing-images) section below for details on related fields. |
 
 ### Inferencing Images
 
-Assets with the `ml-model:inferencing-image` role represent image that can be run to generate inferences using this model. The `href`
-field for these assets should be a fully Docker URI for the image, including the repository, username, image, and tag. The following fields are
-defined for these assets:
+An Asset with the `ml-model:inference-runtime` role represents a
+[Compose file](https://github.com/compose-spec/compose-spec/blob/master/spec.md#compose-file) that can be used to run a containerized version of the
+model to generate inferences. Compose files must be in YAML format, which currently has no official IANA media type. It is RECOMMENDED that you use
+`text/x-yaml` for the `type` field in these Assets.
 
-| Field Name                 | Type          | Description |
-| -------------------------- | ------------- | ----------- |
-| ml-model:command           | string        | **REQUIRED.** A string that should be used as the `COMMAND` argument to the [`docker run`](https://docs.docker.com/engine/reference/run/) command. |
-| ml-model:input-volume      | string        | **REQUIRED.** The volume in the Docker container to which the local directory containing input data should be mapped. For instance, a value of `"/app/data/in"` means that the user should include the `-v /local/dir/with/input-data:/app/data/in` option in the [`docker run`](https://docs.docker.com/engine/reference/run/) command. |
-| ml-model:output-volume     | string\|null  | **REQUIRED.** The volume in the Docker container to which a local directory should be mapped to store output inferences. For instance, a value of `"/app/data/out"` means that the user should include the `-v /local/dir/with/input-data:/app/data/out` option in the [`docker run`](https://docs.docker.com/engine/reference/run/) command. If `null`, then it is assumed that output data will be written to the input volume from `ml-model:input-volume`. |
-| ml-model:requires-gpu      | boolean       | **REQUIRED.** Whether GPU is required to run this image. |
-| ml-model:command-options   | string        | A string representing any additional options that should be appended to the [`docker run`](https://docs.docker.com/engine/reference/run/) command. |
+While the Compose file defines nearly all of the parameters required to run the containerized model image, we still need a way to define which host
+directory containing input data should be mounted to the container and to which host directory the output predictions should be written. The Compose
+file MUST define volume mounts for input and output data using the Compose
+[Interpolation syntax](https://github.com/compose-spec/compose-spec/blob/master/spec.md#interpolation). The input data volume MUST be defined by an
+`INPUT_VOLUME` variable and the output data volume MUST be defined by an `OUTPUT_DATA` variable. 
+
+For example, the following Compose file snippet would mount the host input directory to `/var/data/input` in the container and would mount the host
+output data directory to `/var/data/output` in the host container. In this contrived example, the script to run the model takes 2 arguments: the
+location to the input data directory and the location to the output data directory.
+
+```yaml
+services:
+  ...
+  model_runtime:
+    ...
+    volumes:
+      - "${INPUT_DATA}:/var/data/input"
+      - "${OUTPUT_DATA}:/var/data/output"
+    command: "run-model.sh /var/data/input /var/data/output"
+```
+
+A user would then set the `INPUT_DATA` and `OUTPUT_DATA` environment variables when running the model. An example using `docker-compose` might look
+like the following:
+
+```console
+$ INPUT_DATA=/local/path/to/model/inputs; \
+  OUTPUT_DATA=/local/path/to/model/outputs; \
+  docker-compose up -f path/to/inference-runtime.yml
+```
 
 It is RECOMMENDED that model publishers use the Asset `description` field to describe any other requirements or constraints for running the model
 container.

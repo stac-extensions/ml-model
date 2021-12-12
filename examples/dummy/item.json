@@ -78,16 +78,12 @@
   ],
   "assets": {
     "model": {
-      "href": "gchr.io/username/model-repo:v1.0",
+      "href": "./inferencing.yml",
       "type": "application/vnd.oci.image.index.v1+json",
       "title": "Model image (v1.0)",
       "roles": [
-        "ml-model:inferencing-image"
-      ],
-      "ml-model:command": "/app/run-model.sh",
-      "ml-model:input-volume": "/var/data/input",
-      "ml-model:output-volume": "/var/data/output",
-      "ml-model:requires-gpu": false
+        "ml-model:inference-runtime"
+      ]
     },
     "other": {
       "href": "https://some-domain.com/another/thing.json",
