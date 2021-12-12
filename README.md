@@ -65,9 +65,9 @@ these models for the following types of use-cases:
 
 | Role Name                | Description |
 | ------------------------ | ----------- |
-| ml-model:inference-runtime | Represents a containerized version of the model that can be used to generate inferences. See the [Inferencing Images](#inferencing-images) section below for details on related fields. |
+| ml-model:inference-runtime | Represents a containerized version of the model that can be used to generate inferences. See the [Inferencing Runtimes](#inferencing-runtimes) section below for details on related fields. |
 
-### Inferencing Images
+### Inferencing Runtimes
 
 An Asset with the `ml-model:inference-runtime` role represents a
 [Compose file](https://github.com/compose-spec/compose-spec/blob/master/spec.md#compose-file) that can be used to run a containerized version of the
