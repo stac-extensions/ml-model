@@ -65,7 +65,7 @@ these models for the following types of use-cases:
 
 | Role Name                | Description |
 | ------------------------ | ----------- |
-| ml-model:inference-image | Represents a containerized version of the model that can be used to generate inferences. See the [Inferencing Images](#inferencing-images) section below for details on related fields. |
+| ml-model:inferencing-image | Represents a containerized version of the model that can be used to generate inferences. See the [Inferencing Images](#inferencing-images) section below for details on related fields. |
 
 ### Inferencing Images
 

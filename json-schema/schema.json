@@ -32,7 +32,7 @@
                   ]
                 },
                 {
-                  "$ref": "#/definitions/fields"
+                  "$ref": "#/definitions/item_fields"
                 }
               ]
             },
@@ -40,7 +40,7 @@
               "$comment": "This validates the fields in Item Assets, but does not require them.",
               "type": "object",
               "additionalProperties": {
-                "$ref": "#/definitions/fields"
+                "$ref": "#/definitions/asset_fields"
               }
             }
           }
@@ -82,7 +82,7 @@
                         "$ref": "#/definitions/require_any_field"
                       },
                       {
-                        "$ref": "#/definitions/fields"
+                        "$ref": "#/definitions/asset_fields"
                       }
                     ]
                   }
@@ -107,7 +107,7 @@
                         "$ref": "#/definitions/require_any_field"
                       },
                       {
-                        "$ref": "#/definitions/fields"
+                        "$ref": "#/definitions/asset_fields"
                       }
                     ]
                   }
@@ -165,8 +165,8 @@
         }
       ]
     },
-    "fields": {
-      "$comment": "Add your new fields here. Don't require them here, do that above in the corresponding schema.",
+    "item_fields": {
+      "$comment": "Add your new Item fields here. Don't require them here, do that above in the corresponding schema.",
       "type": "object",
       "properties": {
         "ml-model:learning_approach": {
@@ -179,6 +179,53 @@
           "type": "string"
         }
       },
+      "patternProperties": {
+        "^(?!ml-model:)": {}
+      },
+      "additionalProperties": false
+    },
+    "asset_fields": {
+      "$comment": "Add your new Asset fields here. Don't require them here, do that above in the corresponding schema.",
+      "type": "object",
+      "if": {
+        "properties": {
+          "roles": {
+            "type": "array",
+            "contains": {
+              "const": "ml-model:inferencing-image"
+            }
+          }
+        },
+        "required": ["roles"]
+      },
+      "then": {"$ref": "#/definitions/inferencing-image-asset"},
+      "else": {
+        "patternProperties": {
+          "^(?!ml-model:)": {}
+        },
+        "additionalProperties": false
+      }
+    },
+    "inferencing-image-asset": {
+      "properties": {
+        "ml-model:command": {
+          "type": "string"
+        },
+        "ml-model:input-volume": {
+          "type": "string"
+        },
+        "ml-model:output-volume": {
+          "type": ["string", "null"]
+        },
+        "ml-model:requires-gpu": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "ml-model:command",
+        "ml-model:input-volume",
+        "ml-model:output-volume"
+      ],
       "patternProperties": {
         "^(?!ml-model:)": {}
       },

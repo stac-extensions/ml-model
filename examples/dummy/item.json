@@ -78,12 +78,21 @@
   ],
   "assets": {
     "model": {
-      "href": "https://github.com/m-mohr/gmlmc-hackathon-tree-detection/blob/main/epoch_019.ckpt",
-      "type": "application/x.ckpt",
-      "title": "Model checkpoint file",
+      "href": "gchr.io/username/model-repo:v1.0",
+      "type": "application/vnd.oci.image.index.v1+json",
+      "title": "Model image (v1.0)",
       "roles": [
-        "model"
-      ]
+        "ml-model:inferencing-image"
+      ],
+      "ml-model:command": "/app/run-model.sh",
+      "ml-model:input-volume": "/var/data/input",
+      "ml-model:output-volume": "/var/data/output",
+      "ml-model:requires-gpu": false
+    },
+    "other": {
+      "href": "https://some-domain.com/another/thing.json",
+      "type": "application/json",
+      "title": "Some other asset"
     }
   }
 }
