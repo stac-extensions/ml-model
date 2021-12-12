@@ -65,14 +65,17 @@ these models for the following types of use-cases:
 
 | Role Name                | Description |
 | ------------------------ | ----------- |
-| ml-model:inference-runtime | Represents a containerized version of the model that can be used to generate inferences. See the [Inferencing Runtimes](#inferencing-runtimes) section below for details on related fields. |
+| ml-model:inference-runtime | Represents a file containing instructions for running a containerized version of the model to generate inferences. See the [Inference Runtimes](#inference-runtimes) section below for details on related fields. |
 
-### Inferencing Runtimes
+### Inference Runtimes
 
-An Asset with the `ml-model:inference-runtime` role represents a
-[Compose file](https://github.com/compose-spec/compose-spec/blob/master/spec.md#compose-file) that can be used to run a containerized version of the
-model to generate inferences. Compose files must be in YAML format, which currently has no official IANA media type. It is RECOMMENDED that you use
-`text/x-yaml` for the `type` field in these Assets.
+An Asset with the `ml-model:inference-runtime` role represents a file containing instructions for running a containerized version of the model to
+generate inferences. Currently, only [Compose files](https://github.com/compose-spec/compose-spec/blob/master/spec.md#compose-file) are supported,
+but support is planned for other formats, including [Common Workflow Language (CWL)](https://www.commonwl.org/) and [Workflow Description Language
+(WDL)](https://openwdl.org/).
+
+The `"type"` field should be used to indicate the format of this asset. Assets in the Compose format should have a `"type"` value of
+`"text/x-yaml; application=compose"`.
 
 While the Compose file defines nearly all of the parameters required to run the containerized model image, we still need a way to define which host
 directory containing input data should be mounted to the container and to which host directory the output predictions should be written. The Compose
@@ -137,7 +140,7 @@ The following types should be used as applicable `rel` types in the
 
 | Type                         | Description |
 | ---------------------------- | ----------- |
-| ml-model:image               | Links with this relation type refer to Docker images built using the model. The `href` value for links of this type should contain a fully-qualified URI for the image as would be required for a command like `docker pull`. These URIs should be of the form `<registry_domain>/<user_or_organization_name>/<image_name>:<tag>`. Note that this image may or may not be the same as the image referred to in the Compose file in a [Inferencing Runtime Asset](#inferencing-runtimes) for this Item. |
+| ml-model:image               | Links with this relation type refer to Docker images built using the model. The `href` value for links of this type should contain a fully-qualified URI for the image as would be required for a command like `docker pull`. These URIs should be of the form `<registry_domain>/<user_or_organization_name>/<image_name>:<tag>`. Links with this relation type should have a `"type"` value of `"docker-image"` to indicate a Docker image. |
 
 ## Interpretation of STAC Fields
 

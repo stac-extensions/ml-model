@@ -4,7 +4,7 @@
     "https://stac-extensions.github.io/ml-model/v1.0.0/schema.json"
   ],
   "type": "Feature",
-  "id": "item",
+  "id": "model-item",
   "bbox": [
     34.18,
     0.47,
@@ -74,13 +74,19 @@
       "href": "./collection.json",
       "type": "application/json",
       "title": "Containing Collection"
+    },
+    {
+      "rel": "ml-model:image",
+      "href": "registry.hub.docker.com/my-user/my-model:v1",
+      "type": "docker-image",
+      "title": "My Model (v1)"
     }
   ],
   "assets": {
     "model": {
       "href": "./inferencing.yml",
-      "type": "application/vnd.oci.image.index.v1+json",
-      "title": "Model image (v1.0)",
+      "type": "text/x-yaml; application=compose",
+      "title": "Model inferencing runtime",
       "roles": [
         "ml-model:inference-runtime"
       ]
