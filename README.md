@@ -130,6 +130,15 @@ for a given [Learning Approach](#ml-modellearning_approach).
 - `"segmentation"`
 - `"regression"`
 
+## Relation types
+
+The following types should be used as applicable `rel` types in the
+[Link Object](https://github.com/radiantearth/stac-spec/tree/master/item-spec/item-spec.md#link-object).
+
+| Type                         | Description |
+| ---------------------------- | ----------- |
+| ml-model:image               | Links with this relation type refer to Docker images built using the model. The `href` value for links of this type should contain a fully-qualified URI for the image as would be required for a command like `docker pull`. These URIs should be of the form `<registry_domain>/<user_or_organization_name>/<image_name>:<tag>`. Note that this image may or may not be the same as the image referred to in the Compose file in a [Inferencing Runtime Asset](#inferencing-runtimes) for this Item. |
+
 ## Interpretation of STAC Fields
 
 The semantics of ML model metadata can sometimes differ significantly from the use-cases for which STAC was originally intended (Earth observation
