@@ -59,6 +59,31 @@ these models for the following types of use-cases:
 | ml-model:prediction_type   | string                    | **REQUIRED.** The type of prediction that the model makes. It is STRONGLY RECOMMENDED that you use one of the values described below, but other values are allowed.   |
 | ml-model:architecture      | string                    | **REQUIRED.** Identifies the architecture employed by the model (e.g. RCNN, U-Net, etc.). This may be any string identifier, but publishers are encouraged to use well-known identifiers whenever possible. |
 
+## Asset Objects
+
+### Roles
+
+| Role Name                | Description |
+| ------------------------ | ----------- |
+| ml-model:inference-image | Represents a containerized version of the model that can be used to generate inferences. See the [Inferencing Images](#inferencing-images) section below for details on related fields. |
+
+### Inferencing Images
+
+Assets with the `ml-model:inferencing-image` role represent image that can be run to generate inferences using this model. The `href`
+field for these assets should be a fully Docker URI for the image, including the repository, username, image, and tag. The following fields are
+defined for these assets:
+
+| Field Name                 | Type          | Description |
+| -------------------------- | ------------- | ----------- |
+| ml-model:command           | string        | **REQUIRED.** A string that should be used as the `COMMAND` argument to the [`docker run`](https://docs.docker.com/engine/reference/run/) command. |
+| ml-model:input-volume      | string        | **REQUIRED.** The volume in the Docker container to which the local directory containing input data should be mapped. For instance, a value of `"/app/data/in"` means that the user should include the `-v /local/dir/with/input-data:/app/data/in` option in the [`docker run`](https://docs.docker.com/engine/reference/run/) command. |
+| ml-model:output-volume     | string\|null  | **REQUIRED.** The volume in the Docker container to which a local directory should be mapped to store output inferences. For instance, a value of `"/app/data/out"` means that the user should include the `-v /local/dir/with/input-data:/app/data/out` option in the [`docker run`](https://docs.docker.com/engine/reference/run/) command. If `null`, then it is assumed that output data will be written to the input volume from `ml-model:input-volume`. |
+| ml-model:requires-gpu      | boolean       | **REQUIRED.** Whether GPU is required to run this image. |
+| ml-model:command-options   | string        | A string representing any additional options that should be appended to the [`docker run`](https://docs.docker.com/engine/reference/run/) command. |
+
+It is RECOMMENDED that model publishers use the Asset `description` field to describe any other requirements or constraints for running the model
+container.
+
 ### Additional Field Information
 
 #### ml-model:learning_approach
@@ -107,15 +132,6 @@ It is RECOMMENDED that following STAC Extensions be used in conjunction with the
 
 - [Scientific Citation Extension](https://github.com/stac-extensions/scientific): This extension should be used to describe how the model should
   cited in publications, as well as to reference any existing publications associated with the model.
-
-## Relation types
-
-The following types should be used as applicable `rel` types in the
-[Link Object](https://github.com/radiantearth/stac-spec/tree/master/item-spec/item-spec.md#link-object).
-
-| Type                | Description |
-| ------------------- | ----------- |
-| TBD                 | More detail to come... |
 
 ## Contributing
 
