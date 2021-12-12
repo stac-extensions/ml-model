@@ -177,6 +177,17 @@
         },
         "ml-model:architecture": {
           "type": "string"
+        },
+        "ml-model:training-environment": {
+          "type": "object",
+          "properties": {
+            "operating-system": {
+              "type": "string"
+            },
+            "processor-type": {
+              "type": "string"
+            }
+          }
         }
       },
       "patternProperties": {

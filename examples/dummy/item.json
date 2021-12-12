@@ -54,7 +54,11 @@
     ],
     "ml-model:learning_approach": "supervised",
     "ml-model:prediction_type": "object-detection",
-    "ml-model:architecture": "RCNN"
+    "ml-model:architecture": "RCNN",
+    "ml-model:training-environment": {
+      "processor-type": "gpu",
+      "operating-system": "linux"
+    }
   },
   "links": [
     {
@@ -76,10 +80,28 @@
       "title": "Containing Collection"
     },
     {
-      "rel": "ml-model:image",
-      "href": "registry.hub.docker.com/my-user/my-model:v1",
+      "rel": "ml-model:inferencing-image",
+      "href": "registry.hub.docker.com/my-user/my-inferencing-model:v1",
       "type": "docker-image",
       "title": "My Model (v1)"
+    },
+    {
+      "rel": "ml-model:training-image",
+      "href": "registry.hub.docker.com/my-user/my-training-model:v1",
+      "type": "docker-image",
+      "title": "Image for Training Model"
+    },
+    {
+      "rel": "ml-model:train-data",
+      "href": "https://some-domain.com/training-data/collection.json",
+      "type": "application/json",
+      "title": "Training Data"
+    },
+    {
+      "rel": "ml-model:test-data",
+      "href": "https://some-domain.com/test-data/collection.json",
+      "type": "application/json",
+      "title": "Test Data"
     }
   ],
   "assets": {

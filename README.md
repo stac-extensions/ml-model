@@ -55,24 +55,67 @@ these models for the following types of use-cases:
 
 | Field Name                 | Type                      | Description |
 | -------------------------- | ------------------------- | ----------- |
-| ml-model:learning_approach | string                    | **REQUIRED**. The learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the values described below, but other values are allowed. |
-| ml-model:prediction_type   | string                    | **REQUIRED.** The type of prediction that the model makes. It is STRONGLY RECOMMENDED that you use one of the values described below, but other values are allowed.   |
+| ml-model:learning_approach | string                    | **REQUIRED**. The learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the values [described below](#ml-modellearning_approach), but other values are allowed. |
+| ml-model:prediction_type   | string                    | **REQUIRED.** The type of prediction that the model makes. It is STRONGLY RECOMMENDED that you use one of the values [described below](#ml-modelprediction_type), but other values are allowed.   |
 | ml-model:architecture      | string                    | **REQUIRED.** Identifies the architecture employed by the model (e.g. RCNN, U-Net, etc.). This may be any string identifier, but publishers are encouraged to use well-known identifiers whenever possible. |
+| ml-model:training-environment | [Training Environment Object](#training-environment-object) | Describes the environment used to train the model. See the Link [relation types](#relation-types) defined below for definitions of the data used during training. |
+
+### Training Environment Object
+
+| Field Name                 | Type                      | Description |
+| -------------------------- | ------------------------- | ----------- |
+| operating-system           | string                    | Identifies the operating system on which the model was trained. See the [Operating System](#operating-system) description below for recommended values. |
+| processor-type             | string                    | The type of processor used during training. Must be one of `"cpu"` or `"gpu"`. |
+
+#### Operating System
+
+It is STRONGLY RECOMMENDED that one of the following operating system identifiers (taken from the Python [`sys.platform`
+values](https://docs.python.org/3/library/sys.html#sys.platform) be used whenever possible:
+
+- `aix`
+- `linux`
+- `win32`
+- `cygwin`
+- `darwin`
+
+### Additional Field Information
+
+#### ml-model:learning_approach
+
+Describes the learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the 
+following values, but other values are allowed.
+
+- `"supervised"`
+- `"unsupervised"`
+- `"semi-supervised"`
+- `"reinforcement-learning"`
+
+#### ml-model:prediction_type
+
+Describes the type of predictions made by the model. It is STRONGLY RECOMMENDED that you use one of the 
+following values, but other values are allowed. Note that not all Prediction Type values are valid
+for a given [Learning Approach](#ml-modellearning_approach).
+
+- `"object-detection"`
+- `"classification"`
+- `"segmentation"`
+- `"regression"`
 
 ## Asset Objects
 
 ### Roles
 
-| Role Name                | Description |
-| ------------------------ | ----------- |
-| ml-model:inference-runtime | Represents a file containing instructions for running a containerized version of the model to generate inferences. See the [Inference Runtimes](#inference-runtimes) section below for details on related fields. |
+| Role Name                  | Description |
+| -------------------------- | ----------- |
+| ml-model:inference-runtime | Represents a file containing instructions for running a containerized version of the model to generate inferences. See the [Inference/Training Runtimes](#inferencetraining-runtimes) section below for details on related fields. |
+| ml-model:training-runtime  | Represents a file containing instructions for running a container to train the model. See the [Inference/Training Runtimes](#inferencetraining-runtimes) section below for details on related fields. |
 
-### Inference Runtimes
+### Inference/Training Runtimes
 
-An Asset with the `ml-model:inference-runtime` role represents a file containing instructions for running a containerized version of the model to
-generate inferences. Currently, only [Compose files](https://github.com/compose-spec/compose-spec/blob/master/spec.md#compose-file) are supported,
-but support is planned for other formats, including [Common Workflow Language (CWL)](https://www.commonwl.org/) and [Workflow Description Language
-(WDL)](https://openwdl.org/).
+Assets with the `ml-model:inference-runtime` or `ml-model:training-runtime` role represents files containing instructions for running a containerized
+version of the model to either generate inferences or train the model, respectively. Currently, only [Compose
+files](https://github.com/compose-spec/compose-spec/blob/master/spec.md#compose-file) are supported, but support is planned for other formats,
+including [Common Workflow Language (CWL)](https://www.commonwl.org/) and [Workflow Description Language (WDL)](https://openwdl.org/).
 
 The `"type"` field should be used to indicate the format of this asset. Assets in the Compose format should have a `"type"` value of
 `"text/x-yaml; application=compose"`.
@@ -110,29 +153,6 @@ $ INPUT_DATA=/local/path/to/model/inputs; \
 It is RECOMMENDED that model publishers use the Asset `description` field to describe any other requirements or constraints for running the model
 container.
 
-### Additional Field Information
-
-#### ml-model:learning_approach
-
-Describes the learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the 
-following values, but other values are allowed.
-
-- `"supervised"`
-- `"unsupervised"`
-- `"semi-supervised"`
-- `"reinforcement-learning"`
-
-#### ml-model:prediction_type
-
-Describes the type of predictions made by the model. It is STRONGLY RECOMMENDED that you use one of the 
-following values, but other values are allowed. Note that not all Prediction Type values are valid
-for a given [Learning Approach](#ml-modellearning_approach).
-
-- `"object-detection"`
-- `"classification"`
-- `"segmentation"`
-- `"regression"`
-
 ## Relation types
 
 The following types should be used as applicable `rel` types in the
@@ -140,7 +160,10 @@ The following types should be used as applicable `rel` types in the
 
 | Type                         | Description |
 | ---------------------------- | ----------- |
-| ml-model:image               | Links with this relation type refer to Docker images built using the model. The `href` value for links of this type should contain a fully-qualified URI for the image as would be required for a command like `docker pull`. These URIs should be of the form `<registry_domain>/<user_or_organization_name>/<image_name>:<tag>`. Links with this relation type should have a `"type"` value of `"docker-image"` to indicate a Docker image. |
+| ml-model:inferencing-image   | Links with this relation type refer to Docker images that may be used to generate inferences using the model. The `href` value for links of this type should contain a fully-qualified URI for the image as would be required for a command like `docker pull`. These URIs should be of the form `<registry_domain>/<user_or_organization_name>/<image_name>:<tag>`. Links with this relation type should have a `"type"` value of `"docker-image"` to indicate a Docker image. |
+| ml-model:training-image   | Links with this relation type refer to Docker images that may be used to train the model. The `href` value for links of this type should contain a fully-qualified URI for the image as would be required for a command like `docker pull`. These URIs should be of the form `<registry_domain>/<user_or_organization_name>/<image_name>:<tag>`. Links with this relation type should have a `"type"` value of `"docker-image"` to indicate a Docker image. |
+| ml-model:train-data          | Links with this relation type refer to datasets used to train the model. It is STRONGLY RECOMMENDED that these links refer to a STAC Collection implementing the [Label Extension](https://github.com/stac-extensions/label) |
+| ml-model:test-data           | Links with this relation type refer to datasets used to test the model during training. It is STRONGLY RECOMMENDED that these links refer to a STAC Collection implementing the [Label Extension](https://github.com/stac-extensions/label). |
 
 ## Interpretation of STAC Fields
 

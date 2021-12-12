@@ -1,6 +1,6 @@
 services:
   model-inference:
-    image: docker.io/someusername/some_model_image:1
+    image: registry.hub.docker.com/my-user/my-inferencing-model:v1
     volumes:
       - "${INPUT_VOLUME}:/var/data/input"
       - "${OUTPUT_VOLUME}:/var/data/output"
