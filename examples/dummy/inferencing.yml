@@ -2,7 +2,7 @@ services:
   model-inference:
     image: registry.hub.docker.com/my-user/my-inferencing-model:v1
     volumes:
-      - "${INPUT_VOLUME}:/var/data/input"
-      - "${OUTPUT_VOLUME}:/var/data/output"
+      - "${INPUT_DATA}:/var/data/input"
+      - "${OUTPUT_DATA}:/var/data/output"
     entrypoint: bash /app/scripts/run-model.sh
 

@@ -109,6 +109,7 @@ for a given [Learning Approach](#ml-modellearning_approach).
 | -------------------------- | ----------- |
 | ml-model:inference-runtime | Represents a file containing instructions for running a containerized version of the model to generate inferences. See the [Inference/Training Runtimes](#inferencetraining-runtimes) section below for details on related fields. |
 | ml-model:training-runtime  | Represents a file containing instructions for running a container to train the model. See the [Inference/Training Runtimes](#inferencetraining-runtimes) section below for details on related fields. |
+| ml-model:checkpoint        | Represents a PyTorch checkpoint file that can used to load the model (see [official PyTorch documentation for details](https://pytorch.org/tutorials/beginner/saving_loading_models.html)) |
 
 ### Inference/Training Runtimes
 
@@ -124,7 +125,7 @@ While the Compose file defines nearly all of the parameters required to run the 
 directory containing input data should be mounted to the container and to which host directory the output predictions should be written. The Compose
 file MUST define volume mounts for input and output data using the Compose
 [Interpolation syntax](https://github.com/compose-spec/compose-spec/blob/master/spec.md#interpolation). The input data volume MUST be defined by an
-`INPUT_VOLUME` variable and the output data volume MUST be defined by an `OUTPUT_DATA` variable. 
+`INPUT_DATA` variable and the output data volume MUST be defined by an `OUTPUT_DATA` variable. 
 
 For example, the following Compose file snippet would mount the host input directory to `/var/data/input` in the container and would mount the host
 output data directory to `/var/data/output` in the host container. In this contrived example, the script to run the model takes 2 arguments: the
