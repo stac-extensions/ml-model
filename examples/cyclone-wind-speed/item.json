@@ -66,7 +66,9 @@
     ]
   },
   "properties": {
-    "datetime": "2020-12-11T22:38:32Z",
+    "datetime": null,
+    "start_datetime": "2000-01-01T00:00:00Z",
+    "end_datetime": "2019-12-12T23:59:59Z",
     "license": "MIT",
     "providers": [
       {
@@ -124,7 +126,7 @@
   ],
   "assets": {
     "inferencing-compose": {
-      "href": "./inferencing.yml",
+      "href": "https://raw.githubusercontent.com/RadiantMLHub/cyclone-model-torchgeo/main/inferencing.yml",
       "type": "text/x-yaml; application=compose",
       "title": "Model inferencing runtime",
       "roles": [

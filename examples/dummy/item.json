@@ -40,7 +40,9 @@
   },
   "collection": "containing-collection",
   "properties": {
-    "datetime": "2020-12-11T22:38:32Z",
+    "datetime": null,
+    "start_datetime": "2020-01-01T00:00:00Z",
+    "end_datetime": "2020-12-12T23:59:59Z",
     "license": "MIT",
     "providers": [
       {
