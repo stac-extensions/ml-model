@@ -26,6 +26,7 @@
                 {
                   "$comment": "Require fields here for Item Properties.",
                   "required": [
+                    "ml-model:type",
                     "ml-model:learning_approach",
                     "ml-model:prediction_type",
                     "ml-model:architecture"
@@ -169,6 +170,9 @@
       "$comment": "Add your new Item fields here. Don't require them here, do that above in the corresponding schema.",
       "type": "object",
       "properties": {
+        "ml-model:type": {
+          "const": "ml-model"
+        },
         "ml-model:learning_approach": {
           "type": "string"
         },

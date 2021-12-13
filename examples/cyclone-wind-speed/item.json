@@ -5,7 +5,7 @@
     "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
   ],
   "type": "Feature",
-  "id": "model-item",
+  "id": "model-cyclone-wind-estimation-torchgeo",
   "bbox": [
     -179.999,
     -4.5,
@@ -78,6 +78,7 @@
         "url": "https://www.microsoft.com/en-us/ai/ai-for-good"
       }
     ],
+    "ml-model:type": "ml-model",
     "ml-model:learning_approach": "supervised",
     "ml-model:prediction_type": "regression",
     "ml-model:architecture": "resnet18",

@@ -55,7 +55,8 @@ these models for the following types of use-cases:
 
 | Field Name                 | Type                      | Description |
 | -------------------------- | ------------------------- | ----------- |
-| ml-model:learning_approach | string                    | **REQUIRED**. The learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the values [described below](#ml-modellearning_approach), but other values are allowed. |
+| ml-model:type              | string                    | **REQUIRED.** This MUST always be the constant `"ml-model"`. This purpose of this field is to provide a convenient way to filter ML Model Items in a STAC API. |
+| ml-model:learning_approach | string                    | **REQUIRED.** The learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the values [described below](#ml-modellearning_approach), but other values are allowed. |
 | ml-model:prediction_type   | string                    | **REQUIRED.** The type of prediction that the model makes. It is STRONGLY RECOMMENDED that you use one of the values [described below](#ml-modelprediction_type), but other values are allowed.   |
 | ml-model:architecture      | string                    | **REQUIRED.** Identifies the architecture employed by the model (e.g. RCNN, U-Net, etc.). This may be any string identifier, but publishers are encouraged to use well-known identifiers whenever possible. |
 | ml-model:training-environment | [Training Environment Object](#training-environment-object) | Describes the environment used to train the model. See the Link [relation types](#relation-types) defined below for definitions of the data used during training. |
