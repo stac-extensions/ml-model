@@ -1,0 +1,6 @@
+services:
+  inference:
+    image: radiantearth/cyclone-model-torchgeo:1
+    volumes:
+      - "${INPUT_DATA}:/var/data/input"
+      - "${OUTPUT_DATA}:/var/data/output"

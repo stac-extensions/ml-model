@@ -1,0 +1,136 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/ml-model/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "model-item",
+  "bbox": [
+    -179.999,
+    -4.5,
+    179.999,
+    70.55
+  ],
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            3.2,
+            -4.5
+          ],
+          [
+            3.2,
+            70.55
+          ],
+          [
+            -179.999,
+            70.55
+          ],
+          [
+            -179.999,
+            -4.5
+          ],
+          [
+            3.2,
+            -4.5
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            179.999,
+            17.7
+          ],
+          [
+            179.999,
+            42.7
+          ],
+          [
+            159.55,
+            42.7
+          ],
+          [
+            159.55,
+            17.7
+          ],
+          [
+            179.999,
+            17.7
+          ]
+        ]
+      ]
+    ]
+  },
+  "properties": {
+    "datetime": "2020-12-11T22:38:32Z",
+    "license": "MIT",
+    "providers": [
+      {
+        "name": "Microsoft AI for Good Research Lab (Caleb Robinson)",
+        "roles": [
+          "producer"
+        ],
+        "email": "caleb.robinson@microsoft.com",
+        "url": "https://www.microsoft.com/en-us/ai/ai-for-good"
+      }
+    ],
+    "ml-model:learning_approach": "supervised",
+    "ml-model:prediction_type": "regression",
+    "ml-model:architecture": "resnet18",
+    "sci:doi": "10.5281/zenodo.5773331",
+    "sci:citation": "Caleb Robinson. (2021). Tropical Cyclone Wind Estimation model (2.0). Zenodo. https://doi.org/10.5281/zenodo.5773331.",
+    "sci:publications": [
+      {
+        "sci:citation": "Stewart, A., Robinson, C. and Corley, I., 2021. TorchGeo: deep learning with geospatial data. arXiv preprint arXiv:2111.08872, [online] (11). Available at: <https://arxiv.org/abs/2111.08872> [Date Accessed]."
+      }
+    ]
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "./catalog.json",
+      "type": "application/json",
+      "title": "Root Catalog"
+    },
+    {
+      "rel": "parent",
+      "href": "./catalog.json",
+      "type": "application/json",
+      "title": "Root Catalog"
+    },
+    {
+      "rel": "ml-model:inferencing-image",
+      "href": "docker.io/radiantearth/cyclone-model-torchgeo:1",
+      "type": "docker-image",
+      "title": "Cyclone Wind Estimation Model"
+    },
+    {
+      "rel": "ml-model:train-data",
+      "href": "https://api.radiant.earth/mlhub/v1/collections/nasa_tropical_storm_competition_train_source",
+      "type": "application/json",
+      "title": "Training Data"
+    }
+  ],
+  "assets": {
+    "inferencing-compose": {
+      "href": "./inferencing.yml",
+      "type": "text/x-yaml; application=compose",
+      "title": "Model inferencing runtime",
+      "roles": [
+        "ml-model:inference-runtime"
+      ]
+    },
+    "inferencing-checkpoint": {
+      "href": "https://zenodo.org/record/5773331/files/last.ckpt?download=1",
+      "type": "application/octet-stream",
+      "title": "Final model checkpoint",
+      "roles": [
+        "ml-model:checkpoint"
+      ]
+    }
+  }
+}
