@@ -113,6 +113,12 @@
       "href": "https://api.radiant.earth/mlhub/v1/collections/nasa_tropical_storm_competition_train_source",
       "type": "application/json",
       "title": "Training Data"
+    },
+    {
+      "rel": "related",
+      "href": "./cyclone-model-example-inference.ipynb",
+      "type": "application/x-ipynb+json",
+      "title": "Tutorial for generating inferences from test data"
     }
   ],
   "assets": {
