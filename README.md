@@ -59,25 +59,8 @@ these models for the following types of use-cases:
 | ml-model:learning_approach | string                    | **REQUIRED.** The learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the values [described below](#ml-modellearning_approach), but other values are allowed. |
 | ml-model:prediction_type   | string                    | **REQUIRED.** The type of prediction that the model makes. It is STRONGLY RECOMMENDED that you use one of the values [described below](#ml-modelprediction_type), but other values are allowed.   |
 | ml-model:architecture      | string                    | **REQUIRED.** Identifies the architecture employed by the model (e.g. RCNN, U-Net, etc.). This may be any string identifier, but publishers are encouraged to use well-known identifiers whenever possible. |
-| ml-model:training-environment | [Training Environment Object](#training-environment-object) | Describes the environment used to train the model. See the Link [relation types](#relation-types) defined below for definitions of the data used during training. |
-
-### Training Environment Object
-
-| Field Name                 | Type                      | Description |
-| -------------------------- | ------------------------- | ----------- |
-| operating-system           | string                    | Identifies the operating system on which the model was trained. See the [Operating System](#operating-system) description below for recommended values. |
-| processor-type             | string                    | The type of processor used during training. Must be one of `"cpu"` or `"gpu"`. |
-
-#### Operating System
-
-It is STRONGLY RECOMMENDED that one of the following operating system identifiers (taken from the Python [`sys.platform`
-values](https://docs.python.org/3/library/sys.html#sys.platform) be used whenever possible:
-
-- `aix`
-- `linux`
-- `win32`
-- `cygwin`
-- `darwin`
+| ml-model:training-processor-type | string              | The type of processor used during training. Must be one of `"cpu"` or `"gpu"`. |
+| ml-model:training-os       | string                    | Identifies the operating system on which the model was trained. See the [description below](#ml-modeltraining-os) for recommended values. |
 
 ### Additional Field Information
 
@@ -101,6 +84,17 @@ for a given [Learning Approach](#ml-modellearning_approach).
 - `"classification"`
 - `"segmentation"`
 - `"regression"`
+
+### ml-model:training-os
+
+It is STRONGLY RECOMMENDED that one of the following operating system identifiers (taken from the Python [`sys.platform`
+values](https://docs.python.org/3/library/sys.html#sys.platform) be used whenever possible:
+
+- `aix`
+- `linux`
+- `win32`
+- `cygwin`
+- `darwin`
 
 ## Asset Objects
 
