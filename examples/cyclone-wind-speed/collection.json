@@ -1,0 +1,52 @@
+{
+    "stac_version": "1.0.0",
+    "stac_extensions": [
+      "https://stac-extensions.github.io/ml-model/v1.0.0/schema.json"
+    ],
+    "type": "Collection",
+    "id": "model-cyclone-wind-estimation-torchgeo",
+    "title": "Tropical Cyclone Wind Speed Estimation Model",
+    "description": "Regression model that can be used to esimate the wind speed of a tropical cyclone based on a GOES image of the storm. This model was trained on the [Tropical Cyclone Wind Estimation Competition dataset](https://mlhub.earth/10.34911/rdnt.xs53up) using the [Torchgeo](https://github.com/microsoft/torchgeo) package.",
+    "license": "MIT",
+    "extent": {
+      "spatial": {
+        "bbox": [
+            [
+            -179.999,
+            -89.999,
+            179.999,
+            89.999
+            ]
+        ]
+      },
+      "temporal": {
+        "interval": [
+          [
+            "2000-01-01T00:00:00Z",
+            "2019-12-12T23:59:59Z"
+          ]
+        ]
+      }
+    },
+    "summaries": {
+      "ml-model:learning_approach": [
+        "supervised"
+      ],
+      "ml-model:prediction_type": [
+        "regression"
+      ],
+      "ml-model:architecture": [
+        "resnet18"
+      ]
+    },
+    "links": [
+      {
+        "href": "https://example.com/examples/collection.json",
+        "rel": "self"
+      },
+      {
+        "href": "./item.json",
+        "rel": "item"
+      }
+    ]
+  }
