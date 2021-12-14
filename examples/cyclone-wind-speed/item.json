@@ -70,15 +70,20 @@
   "links": [
     {
       "rel": "root",
-      "href": "./catalog.json",
+      "href": "./collection.json",
       "type": "application/json",
       "title": "Root Catalog"
     },
     {
       "rel": "parent",
-      "href": "./catalog.json",
+      "href": "./collection.json",
       "type": "application/json",
       "title": "Root Catalog"
+    },
+    {
+      "rel": "collection",
+      "href": "./collection.json",
+      "type": "application/json"
     },
     {
       "rel": "ml-model:inferencing-image",
