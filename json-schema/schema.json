@@ -182,16 +182,12 @@
         "ml-model:architecture": {
           "type": "string"
         },
-        "ml-model:training-environment": {
-          "type": "object",
-          "properties": {
-            "operating-system": {
-              "type": "string"
-            },
-            "processor-type": {
-              "type": "string"
-            }
-          }
+        "ml-model:training-os": {
+          "type": "string"
+        },
+        "ml-model:training-processor-type": {
+          "type": "string",
+          "enum": ["cpu", "gpu"]
         }
       },
       "patternProperties": {

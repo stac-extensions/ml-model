@@ -58,10 +58,8 @@
     "ml-model:learning_approach": "supervised",
     "ml-model:prediction_type": "object-detection",
     "ml-model:architecture": "RCNN",
-    "ml-model:training-environment": {
-      "processor-type": "gpu",
-      "operating-system": "linux"
-    }
+    "ml-model:training-processor-type": "gpu",
+    "ml-model:training-os": "linux"
   },
   "links": [
     {
