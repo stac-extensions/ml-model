@@ -8,7 +8,7 @@
 - **Owner**: @duckontheweb
 
 This document explains the ML Model Extension to the [SpatioTemporal Asset
-Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification. More details to come...
+Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification. 
 
 - Examples:
   - [Item example](examples/dummy/item.json): Shows the basic usage of the extension in a STAC Item
