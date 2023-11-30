@@ -5,10 +5,10 @@
 - **Field Name Prefix:** ml-model
 - **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
-- **Owner**: @duckontheweb
+- **Owner**: @rbavery
 
 This document explains the ML Model Extension to the [SpatioTemporal Asset
-Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification. 
+Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 
 - Examples:
   - [Item example](examples/dummy/item.json): Shows the basic usage of the extension in a STAC Item
@@ -18,9 +18,9 @@ Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 ## Scope & Vision
 
 The goal of the STAC ML Model Extension is to provide a way of cataloging machine learning (ML) models that operate on Earth observation (EO) data
-described as a STAC catalog. The metadata related to machine learning models and their related artifacts (e.g. training data, performance  metrics,
+described as a STAC catalog. The metadata related to machine learning models and their related artifacts (e.g. training data, performance  metrics, inference requirements
 etc.) can be extremely broad. This extension limits its scope to ML model metadata that aids in the discoverability and usability/reusability of
-these models for the following types of use-cases:
+these models for inference (model prediction). The spec also places emphasis on providing model card information for each model, so that users understand the performance and limitations of the model. Therefore, the main use case for this extension is as follows:
 
 - **Adoption of Models in Analytic Pipelines**
 
@@ -29,27 +29,7 @@ these models for the following types of use-cases:
     classification). Consider the example of a global non-profit organization that wants to use ML to track deforestation. A data engineer from this
     organization might be interested in discovering segmentation models that accurately produce land cover classes over parts of South America using
     Sentinel 2 imagery. The STAC ML Model Extension aims to support this use-case by describing metadata related to the recommended area over which
-    the model may be used, a description of the model architecture and type of input data it requires, and links to containerized model images or
-    model files that can be used to run the model to generate inferences.
-
-- **Re-training of Existing Models in New Contexts**
-
-    The process of training ML models on Earth observation data can be extremely time-consuming and costly due to the volume of data required.
-    Providing tools that ease the discovery of existing models and training data will make ML models more accessible by reducing this training
-    burden. Suppose the non-profit from the previous example found a model that generated the kind of predictions they were interested in, but was
-    not applicable to their region of interest. Rather than creating a new model from scratch, the organization might be interested in using transfer
-    learning to re-train the existing model on data from their area of interest. In this case, they would need enough information about the training
-    environment and model architecture to reproduce the model weights and continue training the model using new data. The STAC ML Model Extensions
-    aims to support this use-case by providing links to serialized versions of the model (e.g. a PyTorch checkpoint file) as well as enough detail
-    about the training environment that a data scientist could reasonably implement transfer learning using new data.
-
-- **Reproducibility of ML Experiments**
-
-    The ability to reproduce published ML experiments is crucial for verifying and building upon previous ML research. Increasingly, individuals and
-    institutions are making an effort to publish code and examples along with academic publications to enable this kind of reproducibility. However,
-    the quality and usability of this code and related documentation can vary widely and there are currently no standards that ensure that a new
-    researcher could reproduce a given set of published results from the documentation. The STAC ML Model Extension aims to address this issue by
-    providing a detailed description of the training data and environment used in a ML model experiment. 
+    the model may be used, a description of the model architecture and type of input data it requires, and links to model files that can be used to run the model to generate inferences.
 
 ## Item Properties
 
@@ -66,17 +46,18 @@ these models for the following types of use-cases:
 
 #### ml-model:learning_approach
 
-Describes the learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the 
+Describes the learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the
 following values, but other values are allowed.
 
 - `"supervised"`
 - `"unsupervised"`
 - `"semi-supervised"`
+- `"self-supervised"`
 - `"reinforcement-learning"`
 
 #### ml-model:prediction_type
 
-Describes the type of predictions made by the model. It is STRONGLY RECOMMENDED that you use one of the 
+Describes the type of predictions made by the model. It is STRONGLY RECOMMENDED that you use one of the
 following values, but other values are allowed. Note that not all Prediction Type values are valid
 for a given [Learning Approach](#ml-modellearning_approach).
 
@@ -84,17 +65,16 @@ for a given [Learning Approach](#ml-modellearning_approach).
 - `"classification"`
 - `"segmentation"`
 - `"regression"`
+- `"multi-modal"`
 
-### ml-model:training-os
+### ml-model:training-architecture
 
-It is STRONGLY RECOMMENDED that one of the following operating system identifiers (taken from the Python [`sys.platform`
-values](https://docs.python.org/3/library/sys.html#sys.platform) be used whenever possible:
+It is STRONGLY RECOMMENDED that one of the following architecture identifiers, used by Docker and Golang:(https://go.dev/doc/install/source#environment). For example:
 
-- `aix`
-- `linux`
-- `win32`
-- `cygwin`
-- `darwin`
+- `linux-amd64` - Linux x86-64
+- `windows-amd64` - Windows x86-64
+- `darwin-arm64` - MacOs Silicon
+- `darwin-amd64` - MacOs x86-64
 
 ## Asset Objects
 
@@ -120,7 +100,7 @@ While the Compose file defines nearly all of the parameters required to run the 
 directory containing input data should be mounted to the container and to which host directory the output predictions should be written. The Compose
 file MUST define volume mounts for input and output data using the Compose
 [Interpolation syntax](https://github.com/compose-spec/compose-spec/blob/master/spec.md#interpolation). The input data volume MUST be defined by an
-`INPUT_DATA` variable and the output data volume MUST be defined by an `OUTPUT_DATA` variable. 
+`INPUT_DATA` variable and the output data volume MUST be defined by an `OUTPUT_DATA` variable.
 
 For example, the following Compose file snippet would mount the host input directory to `/var/data/input` in the container and would mount the host
 output data directory to `/var/data/output` in the host container. In this contrived example, the script to run the model takes 2 arguments: the
@@ -208,10 +188,10 @@ extension, please open a PR to include it in the `examples` directory. Here are 
 
 ### Running tests
 
-The same checks that run as checks on PR's are part of the repository and can be run locally to verify that changes are valid. 
+The same checks that run as checks on PR's are part of the repository and can be run locally to verify that changes are valid.
 To run tests locally, you'll need `npm`, which is a standard part of any [node.js installation](https://nodejs.org/en/download/).
 
-First you'll need to install everything with npm once. Just navigate to the root of this repository and on 
+First you'll need to install everything with npm once. Just navigate to the root of this repository and on
 your command line run:
 ```bash
 npm install
