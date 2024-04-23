@@ -1,10 +1,16 @@
 # ML Model Extension Specification
 
+> :warning: <br>
+> This repository is deprecated in favor of
+> [https://github.com/crim-ca/mlm-extension](https://github.com/crim-ca/mlm-extension). <br>
+> The corresponding schemas are made available on
+> [https://crim-ca.github.io/mlm-extension/](https://crim-ca.github.io/mlm-extension/).
+
 - **Title:** ML Model
 - **Identifier:** <https://stac-extensions.github.io/ml-model/v1.0.0/schema.json>
 - **Field Name Prefix:** ml-model
 - **Scope:** Item, Collection
-- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
+- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Deprecated
 - **Owner**: @duckontheweb
 
 This document explains the ML Model Extension to the [SpatioTemporal Asset
