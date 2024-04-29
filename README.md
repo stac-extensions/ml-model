@@ -165,7 +165,7 @@ The `"type"` field should be used to indicate the format of the asset. Assets in
 ```json
 {
   "inferencing-cwl": {
-      "href": "https://github.com/Terradue/app-package-training-bids23/blob/main/cwl-workflow/app-water-body-cloud-native.cwl#main",
+      "href": "https://raw.githubusercontent.com/ai-extensions/notebooks/s6/scenario-6/inference/app-package/water-bodies-app-inference.cwl#main",
       "type": "application/cwl+yaml",
       "title": "Model inferencing runtime",
       "roles": [
@@ -173,7 +173,7 @@ The `"type"` field should be used to indicate the format of the asset. Assets in
       ]
     },
   "inferencing-input": {
-      "href": "https://raw.githubusercontent.com/Terradue/app-package-training-bids23/main/cwl-cli/crop-params.yaml",
+      "href": "https://raw.githubusercontent.com/ai-extensions/notebooks/s6/scenario-6/inference/app-package/params.yml",
       "type": "application/yaml",
       "title": "Input data for the model",
       "roles": [
