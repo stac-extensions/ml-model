@@ -157,9 +157,11 @@ container.
 #### Common Workflow Language (CWL)
 
 A [Common Workflow Language (CWL)](https://www.commonwl.org/) file is used to describe workflows and tools for data processing.
-Inside the CWL file are defined inputs, outputs, the relationships between the processing steps and the docker images in which each step can be executed.
+Inside the CWL file are defined inputs, outputs, the relationships between the processing steps and the docker images
+in which each step can be executed.
 
-For executing the workflow, the CWL file must be executed with a CWL runner giving an entry point that can be specified in the fragment (using `#`) directly in the `href`.
+For executing the workflow, the CWL file must be executed with a CWL runner giving an entry point
+that can be specified in the fragment (using `#`) directly in the `href`.
 The `"type"` field should be used to indicate the format of the asset. Assets in the CWL format should have a `"type"` value of `"application/cwl+yaml"`.
 
 ```json
