@@ -1,10 +1,15 @@
 # ML Model Extension Specification
 
-> :warning: <br>
+> [!WARNING]
 > This repository is deprecated in favor of
-> [https://github.com/crim-ca/mlm-extension](https://github.com/crim-ca/mlm-extension). <br>
+> [https://github.com/stac-extensions/mlm](https://github.com/stac-extensions/mlm). <br>
 > The corresponding schemas are made available on
-> [https://crim-ca.github.io/mlm-extension/](https://crim-ca.github.io/mlm-extension/).
+> [https://stac-extensions.github.io/mlm/](https://stac-extensions.github.io/mlm/).
+>
+> It is **STRONGLY** recommended to migrate `ml-model` definitions to the `mlm` extension.
+> The `mlm` extension improves the model metadata definition and properties with added support for use cases not directly supported by `ml-model`.
+> It also provides increased interroperability with other STAC extensions, adds best-practices recommendations, provides tooling for creating
+> STAC attributes, and works toward alignement efforts from both geospatial and machine learning communities.
 
 - **Title:** ML Model
 - **Identifier:** <https://stac-extensions.github.io/ml-model/v1.0.0/schema.json>
