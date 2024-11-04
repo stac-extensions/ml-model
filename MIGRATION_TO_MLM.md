@@ -67,6 +67,7 @@ Notable differences:
 | **`mlm:pretrained`**             | Indicates if the model is derived from a pretrained model.                                                              |
 | **`mlm:pretrained_source`**      | Source of the pretrained model by name or URL if it is less well known.                                                 |
 | **`mlm:batch_size_suggestion`**  | Suggested batch size for the given accelerator.                                                                         |
+| **`mlm:accelerator`**| Indicates the specific accelerator recommended for the model.                                                          |
 | **`mlm:accelerator_constrained`**| Indicates if the model requires a specific accelerator.                                                                 |
 | **`mlm:accelerator_summary`**    | Description of the accelerator. This might contain details on the exact accelerator version (TPUv4 vs TPUv5) and their configuration. |
 | **`mlm:accelerator_count`**      | Minimum number of accelerator instances required.                                                                       |
@@ -81,14 +82,14 @@ Notable differences:
 | `ml-model:inference-runtime` | `mlm:inference-runtime` | Direct conversion; same role and function.                                                         |
 | `ml-model:training-runtime`  | `mlm:training-runtime`  | Direct conversion; same role and function.                                                         |
 | `ml-model:checkpoint`        | `mlm:checkpoint`        | Direct conversion; same role and function.                                                         |
-| N/A                          | `mlm:model`             | New required role for model assets in MLM. This represents the asset that is loaded for inference. |
+| N/A                          | `mlm:model`             | New required role for model assets in MLM. This represents the asset that is the source of model weights and definition. |
 | N/A                          | `mlm:source_code`       | Recommended for providing source code details.                                                     |
 | N/A                          | `mlm:container`         | Recommended for containerized environments.                                                        |
-| N/A                          | `mlm:training`          | Recommended for training pipelines.                                                                |
-| N/A                          | `mlm:inference`         | Recommended for inference pipelines.                                                               |
+| N/A                          | `mlm:training`          | Recommended for training pipeline assets.                                                                |
+| N/A                          | `mlm:inference`         | Recommended for inference pipeline assets.                                                               |
 
 
-The MLM is focused on search, discovery descriptions, and reproducibility of inference. Nevertheless, the MLM provides a recommended asset role for `mlm:training-runtime` and asset `mlm:training`, which can point to a container URL that has the training runtime requirements. The ML Model extension specifies a field for `ml-model:training-runtime` but like `mlm:training` it only contains the default STAC Asset fields and additional fields specified by the Container Asset. Training requirements typically differ from inference requirements so therefore we recommend that fields and assets for reproducing model training or fine-tuning models be contained in a separate STAC extension.
+The MLM provides a recommended asset role for `mlm:training-runtime` and asset `mlm:training`, which can point to a container URL that has the training runtime requirements. The ML Model extension specifies a field for `ml-model:training-runtime` and like `mlm:training` it only contains the default STAC Asset fields and a few additional fields specified by the Container Asset. Training requirements typically differ from inference requirements which is why there are two separate Container assets in both extensions.
 
 ## Getting Help
 
