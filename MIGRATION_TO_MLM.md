@@ -37,8 +37,8 @@ Both the ML Model Extension and the Machine Learning Model (MLM) Extension aim t
 Notable differences:
 
 - The MLM Extension covers more details at both the Item and Asset levels, making it easier to describe and use model metadata.
-- The MLM Extension covers Runtime requirements within the [Container Asset](https://github.com/crim-ca/mlm-extension?tab=readme-ov-file#container-asset), while the ML Model Extension records [similar information](./README.md#inferencetraining-runtimes) in the `ml-model:inference-runtime` or `ml-model:training-runtime` asset roles.
-- The MLM extension has a corresponding Python library, [`stac-model`](https://pypi.org/project/stac-model/) which can be used to create and validate MLM metadata. An example of the library in action is [here](https://github.com/crim-ca/mlm-extension/blob/main/stac_model/examples.py#L14). The ML Model extension does not support this and requires the JSON to be written manually by interpreting the JSON Schema or existing examples.
+- The MLM Extension covers Runtime requirements within the [Container Asset](https://github.com/stac-extensions/mlm?tab=readme-ov-file#container-asset), while the ML Model Extension records [similar information](./README.md#inferencetraining-runtimes) in the `ml-model:inference-runtime` or `ml-model:training-runtime` asset roles.
+- The MLM extension has a corresponding Python library, [`stac-model`](https://pypi.org/project/stac-model/) which can be used to create and validate MLM metadata. An example of the library in action is [here](https://github.com/stac-extensions/mlm/blob/main/stac_model/examples.py#L14). The ML Model extension does not support this and requires the JSON to be written manually by interpreting the JSON Schema or existing examples.
 - MLM is easier to maintain and enhance in a fast moving ML ecosystem thanks to it's use of pydantic models, while still being compatible with pystac for extension and STAc core validation.
 
 ## Changes in Field Names
@@ -93,6 +93,6 @@ The MLM provides a recommended asset role for `mlm:training-runtime` and asset `
 
 ## Getting Help
 
-If you have any questions about a migration, feel free to contact the maintainers by opening a discussion or issue on the [MLM repository](https://github.com/crim-ca/mlm-extension).
+If you have any questions about a migration, feel free to contact the maintainers by opening a discussion or issue on the [MLM repository](https://github.com/stac-extensions/mlm).
 
 If you see a feature missing in the MLM, feel free to open an issue describing your feature request.
