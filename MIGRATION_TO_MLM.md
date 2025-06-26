@@ -1,8 +1,12 @@
 # Migration Guide: ML Model Extension to MLM Extension
 
+<!-- lint disable no-undefined-references -->
+
 >[!IMPORTANT]
-> For specific migration details from [ML-Model](README.md) to [Machine Learning Model (MLM)][mlm]
-> please refer to the [Migration Document](https://github.com/stac-extensions/mlm/blob/main/docs/legacy/ml-model.md).
+> For specific field migration details from [ML-Model](README.md) to [Machine Learning Model (MLM)][mlm] please refer
+> to the [MLM Migration Document](https://github.com/stac-extensions/mlm/blob/main/docs/legacy/ml-model.md).
+
+<!-- lint enable no-undefined-references -->
 
 ## Context
 

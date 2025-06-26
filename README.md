@@ -1,16 +1,24 @@
 # ML Model Extension Specification
 
+<!-- lint disable no-undefined-references -->
+
 > [!WARNING]
 > This repository is deprecated in favor of
 > [https://github.com/stac-extensions/mlm](https://github.com/stac-extensions/mlm). <br>
 > The corresponding schemas are made available on
 > [https://stac-extensions.github.io/mlm/](https://stac-extensions.github.io/mlm/).
-> Documentation on migrating from the Ml Model Extension to the Machine Learning Model Extension (MLM) is [here](./MIGRATION_TO_MLM.md).
+> Documentation on migrating from the ML-Model extension to the Machine Learning Model (MLM) extension
+> is [here](./MIGRATION_TO_MLM.md). Further details are also available in the
+> [MLM Migration Document](https://github.com/stac-extensions/mlm/blob/main/docs/legacy/ml-model.md)
 >
 > It is **STRONGLY** recommended to migrate `ml-model` definitions to the `mlm` extension.
-> The `mlm` extension improves the model metadata definition and properties with added support for use cases not directly supported by `ml-model`.
-> It also provides increased interroperability with other STAC extensions, adds best-practices recommendations, provides tooling for creating
-> STAC attributes, and works toward alignement efforts from both geospatial and machine learning communities.
+> The `mlm` extension improves the model metadata definition and properties with added support
+> for use cases not directly supported by `ml-model`.
+> It also provides increased interoperability with other STAC extensions, adds best-practices recommendations,
+> provides tooling for creating STAC attributes, and works toward alignement efforts from both geospatial and
+> machine learning communities.
+
+<!-- lint enable no-undefined-references -->
 
 - **Title:** ML Model
 - **Identifier:** <https://stac-extensions.github.io/ml-model/v1.0.0/schema.json>
