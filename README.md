@@ -1,14 +1,34 @@
 # ML Model Extension Specification
 
+<!-- lint disable no-undefined-references -->
+
+> [!WARNING]
+> This repository is deprecated in favor of
+> [https://github.com/stac-extensions/mlm](https://github.com/stac-extensions/mlm). <br>
+> The corresponding schemas are made available on
+> [https://stac-extensions.github.io/mlm/](https://stac-extensions.github.io/mlm/).
+> Documentation on migrating from the ML-Model extension to the Machine Learning Model (MLM) extension
+> is [here](./MIGRATION_TO_MLM.md). Further details are also available in the
+> [MLM Migration Document](https://github.com/stac-extensions/mlm/blob/main/docs/legacy/ml-model.md)
+>
+> It is **STRONGLY** recommended to migrate `ml-model` definitions to the `mlm` extension.
+> The `mlm` extension improves the model metadata definition and properties with added support
+> for use cases not directly supported by `ml-model`.
+> It also provides increased interoperability with other STAC extensions, adds best-practices recommendations,
+> provides tooling for creating STAC attributes, and works toward alignement efforts from both geospatial and
+> machine learning communities.
+
+<!-- lint enable no-undefined-references -->
+
 - **Title:** ML Model
 - **Identifier:** <https://stac-extensions.github.io/ml-model/v1.0.0/schema.json>
 - **Field Name Prefix:** ml-model
 - **Scope:** Item, Collection
-- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
+- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Deprecated
 - **Owner**: @duckontheweb
 
 This document explains the ML Model Extension to the [SpatioTemporal Asset
-Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification. 
+Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 
 - Examples:
   - [Item example](examples/dummy/item.json): Shows the basic usage of the extension in a STAC Item
@@ -49,7 +69,7 @@ these models for the following types of use-cases:
     institutions are making an effort to publish code and examples along with academic publications to enable this kind of reproducibility. However,
     the quality and usability of this code and related documentation can vary widely and there are currently no standards that ensure that a new
     researcher could reproduce a given set of published results from the documentation. The STAC ML Model Extension aims to address this issue by
-    providing a detailed description of the training data and environment used in a ML model experiment. 
+    providing a detailed description of the training data and environment used in a ML model experiment.
 
 ## Item Properties
 
@@ -66,7 +86,7 @@ these models for the following types of use-cases:
 
 #### ml-model:learning_approach
 
-Describes the learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the 
+Describes the learning approach used to train the model. It is STRONGLY RECOMMENDED that you use one of the
 following values, but other values are allowed.
 
 - `"supervised"`
@@ -76,7 +96,7 @@ following values, but other values are allowed.
 
 #### ml-model:prediction_type
 
-Describes the type of predictions made by the model. It is STRONGLY RECOMMENDED that you use one of the 
+Describes the type of predictions made by the model. It is STRONGLY RECOMMENDED that you use one of the
 following values, but other values are allowed. Note that not all Prediction Type values are valid
 for a given [Learning Approach](#ml-modellearning_approach).
 
@@ -120,7 +140,7 @@ While the Compose file defines nearly all of the parameters required to run the 
 directory containing input data should be mounted to the container and to which host directory the output predictions should be written. The Compose
 file MUST define volume mounts for input and output data using the Compose
 [Interpolation syntax](https://github.com/compose-spec/compose-spec/blob/master/spec.md#interpolation). The input data volume MUST be defined by an
-`INPUT_DATA` variable and the output data volume MUST be defined by an `OUTPUT_DATA` variable. 
+`INPUT_DATA` variable and the output data volume MUST be defined by an `OUTPUT_DATA` variable.
 
 For example, the following Compose file snippet would mount the host input directory to `/var/data/input` in the container and would mount the host
 output data directory to `/var/data/output` in the host container. In this contrived example, the script to run the model takes 2 arguments: the
@@ -208,10 +228,10 @@ extension, please open a PR to include it in the `examples` directory. Here are 
 
 ### Running tests
 
-The same checks that run as checks on PR's are part of the repository and can be run locally to verify that changes are valid. 
+The same checks that run as checks on PR's are part of the repository and can be run locally to verify that changes are valid.
 To run tests locally, you'll need `npm`, which is a standard part of any [node.js installation](https://nodejs.org/en/download/).
 
-First you'll need to install everything with npm once. Just navigate to the root of this repository and on 
+First you'll need to install everything with npm once. Just navigate to the root of this repository and on
 your command line run:
 ```bash
 npm install
