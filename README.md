@@ -125,13 +125,18 @@ values](https://docs.python.org/3/library/sys.html#sys.platform) be used wheneve
 | ml-model:inference-runtime | Represents a file containing instructions for running a containerized version of the model to generate inferences. See the [Inference/Training Runtimes](#inferencetraining-runtimes) section below for details on related fields. |
 | ml-model:training-runtime  | Represents a file containing instructions for running a container to train the model. See the [Inference/Training Runtimes](#inferencetraining-runtimes) section below for details on related fields. |
 | ml-model:checkpoint        | Represents a PyTorch checkpoint file that can used to load the model (see [official PyTorch documentation for details](https://pytorch.org/tutorials/beginner/saving_loading_models.html)) |
+| ml-model:input             | Represents an optional file containing the information to run the model runtime. The input contains the references to the STAC item. |
 
 ### Inference/Training Runtimes
 
 Assets with the `ml-model:inference-runtime` or `ml-model:training-runtime` role represents files containing instructions for running a containerized
-version of the model to either generate inferences or train the model, respectively. Currently, only [Compose
-files](https://github.com/compose-spec/compose-spec/blob/master/spec.md#compose-file) are supported, but support is planned for other formats,
-including [Common Workflow Language (CWL)](https://www.commonwl.org/) and [Workflow Description Language (WDL)](https://openwdl.org/).
+version of the model to either generate inferences or train the model, respectively. Following section describes how the assets are linked to the
+model and how they should be structured.
+
+#### Compose Files
+
+[Compose files](https://github.com/compose-spec/compose-spec/blob/master/spec.md#compose-file) can be used to define the runtime environment for
+running the model. The Compose file should define a service named `model_runtime` that contains all of the necessary parameters to run the model.
 
 The `"type"` field should be used to indicate the format of this asset. Assets in the Compose format should have a `"type"` value of
 `"text/x-yaml; application=compose"`.
@@ -168,6 +173,40 @@ $ INPUT_DATA=/local/path/to/model/inputs; \
 
 It is RECOMMENDED that model publishers use the Asset `description` field to describe any other requirements or constraints for running the model
 container.
+
+#### Common Workflow Language (CWL)
+
+A [Common Workflow Language (CWL)](https://www.commonwl.org/) file is used to describe workflows and tools for data processing.
+Inside the CWL file are defined inputs, outputs, the relationships between the processing steps and the docker images
+in which each step can be executed.
+
+For executing the workflow, the CWL file must be executed with a CWL runner giving an entry point
+that can be specified in the fragment (using `#`) directly in the `href`.
+The `"type"` field should be used to indicate the format of the asset. Assets in the CWL format should have a `"type"` value of `"application/cwl+yaml"`.
+
+```json
+{
+  "inferencing-cwl": {
+      "href": "https://raw.githubusercontent.com/ai-extensions/notebooks/s6/scenario-6/inference/app-package/water-bodies-app-inference.cwl#main",
+      "type": "application/cwl+yaml",
+      "title": "Model inferencing runtime",
+      "roles": [
+        "ml-model:inference-runtime"
+      ]
+    },
+  "inferencing-input": {
+      "href": "https://raw.githubusercontent.com/ai-extensions/notebooks/s6/scenario-6/inference/app-package/params.yml",
+      "type": "application/yaml",
+      "title": "Input data for the model",
+      "roles": [
+        "ml-model:input"
+      ]
+    }
+}
+```
+
+As shown in the example above, the `"ml-model:input"` asset is used to provide the input data for the model with a reference to the STAC item.
+Of course, the STAC item URL in the input can be relative because a volume with the pre-staged data is mounted in the container.
 
 ## Relation types
 
